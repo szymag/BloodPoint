@@ -18,6 +18,7 @@ class BloodDonationPoint():
         self.Q=11
         self.UtilizedBlood=0
         self.BloodForScience=0
+        self.BloodId=0
         self.Distributions=Distributions()
 
         self.EnVariable=0

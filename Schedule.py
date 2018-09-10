@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Event
 
 class Schedule():
@@ -29,21 +28,3 @@ class Schedule():
         return(a)
 
 # print("d")
-=======
-import Event
-
-class Schedule:
-    def __init__(self):
-        print("dupaaaa")
-
-        self.schedule = []
-
-    def Insert(Event):
-        self.ev = Event()
-        self.schedule.Add(ev)
-        # self.schedule.Sort((p,q)) 
-
-    def Print():
-        for value in self.schedule:
-            print(value)
->>>>>>> 4f4fc14c96e7c6c9d79354c4f43045ef07401993
