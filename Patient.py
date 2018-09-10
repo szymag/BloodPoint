@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from Process import Process
 import time
 # from Distributions import Distributions
@@ -100,4 +101,21 @@ class Patient(Process):
 
 
 
+=======
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import Process
+import time
+import Distributions
+
+class Patient(Process.Process):
+
+    
+
+    def __init__(self, system):
+        # Process.__init__(self)
+        BrithTime = system.SystemTime
+        BloodNeeded = Distributions.Distributions().GetGeometric()
+
+>>>>>>> 4f4fc14c96e7c6c9d79354c4f43045ef07401993
 # Pat=Patient()

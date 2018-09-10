@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # from KernelsGenerator import KernelsGenerator
 import math
 class Distributions():
@@ -76,3 +77,33 @@ class Distributions():
             sum=sum+r
         result = ((( sum - 5) / (math.sqrt(100/12))) +500 )
         return result
+=======
+import KernelsGenerator
+class Distributions():
+    def __init__(self):
+        self.KernelsGenerator = KernelsGenerator.KernelsGenerator()
+        pass
+
+    def GetGeometric(self):
+        i=0
+        flag=False
+        GeometricValue = self.KernelsGenerator.Generate()
+        while (flag != True):
+            flag = self.Bernouli(GeometricValue)
+            if (flag!= True):
+                i+=1
+            GeometricValue= self.KernelsGenerator.Generate()
+        return i
+
+    def GetUniform(self):
+        Value = self.KernelsGenerator.Generate()
+        result = (Value / 100) % 1
+        return result
+
+    def Bernouli(self,randomVariable):
+        BernouliValue = self.GetUniform()
+        if (BernouliValue < 0.2): #W=0.2 wynika ze sredniej potrzebnej do tego zadania
+            return True
+        else:
+            return False
+>>>>>>> 4f4fc14c96e7c6c9d79354c4f43045ef07401993
