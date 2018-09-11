@@ -3,7 +3,7 @@ from bdp import BloodDonationPoint
 import Event
 
 class Process(BloodDonationPoint):
-    BDPoint=0
+    # BDPoint=0
     def __init__(self,system):
         self.Phase = 0
         self.BDPoint = system

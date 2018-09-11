@@ -13,7 +13,7 @@ class Patient(Process):
         super().__init__(system)
         self.name="Pacjet"
         self.BrithTime = self.BDPoint.SystemTime
-        self.BloodNeeded = system.Distributions.GetGeometric()
+        self.BloodNeeded = self.BDPoint.Distributions.GetGeometric()
         self.PatientID=self.BDPoint.PatientNumber
         if(self.BloodNeeded==0):
             self.BloodNeeded=1

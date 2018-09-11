@@ -7,7 +7,6 @@ class Program():
     empCount = 0
 
     def __init__(self):
-        # self.a = BDP*
         self.bloodDonationPoint = BloodDonationPoint()
         self.Patient=Patient(self.bloodDonationPoint)
         self.Patient.Activate(1.0)
@@ -47,5 +46,8 @@ class Program():
             if(stepMode==True):
                 input()
         print("Czas na fazę początkową = " +  str(self.bloodDonationPoint.InitialPhase))
-        # print("Krew na badania naukowe oddano " + str(self.))
+        print("Krew na badania naukowe oddano " + str(self.bloodDonationPoint.EnlargmentNumber) + ", w sumie na badania oddano " + str(self.bloodDonationPoint.BloodForScience) + " jednostek krwi.")
+        print("Obsluzono " + str(self.bloodDonationPoint.PatientNumber) + " pacjentow")
+        print("Obsluzono " + str(self.bloodDonationPoint.DonorNumber) + " dawcow")
+
 run=Program()

@@ -23,6 +23,9 @@ class BloodDonationPoint():
         self.PatientNumber=0
         self.DonorNumber=0
 
+        self.EnlargmentNumber=0
+        self.UnitOnScience=0
+
         self.EnVariable=0
         self.busyFlag=0
 
