@@ -1,7 +1,7 @@
 class BloodUnit():
     
     def __init__(self,system,tempTime):
-        system.BDPoint.BloodId+=1
+        system.BloodNumber+=1
         self.ExpirationDate = tempTime
-        self.ID=system.BDPoint.BloodId
+        self.ID=system.BloodNumber
         

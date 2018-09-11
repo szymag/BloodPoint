@@ -3,12 +3,12 @@ from Process import Process
 # from Distributions import Distributions
 from BloodUnit import BloodUnit
 class Donor(Process):
-    DonorID=0
+    # DonorID=0
     def __init__(self,system):
         super().__init__(system)
         self.name="Donor"
         self.Time=1000
-        
+        self.DonorID=self.BDPoint.DonorNumber
         # self.BDPoint=system
         # self.
 
@@ -16,12 +16,12 @@ class Donor(Process):
         activate=True
         while(activate):
             if(self.BDPoint.SystemTime>self.BDPoint.InitialPhase):
-                self.DonorID+=1
+                self.BDPoint.DonorNumber+=1
             print("Pojawienie sie dawcy nr " + str(self.DonorID) + " w systemie.")
             
             newDonor=Donor(self.BDPoint)
             newDonor.Activate(self.BDPoint.Distributions.GetExponential(950))
-            self.BDPoint.AddBlood(BloodUnit(self,self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
 
             print("Aktualny stan jednostek krwi: " + str(len(self.BDPoint.BloodList)))
             activate=False

@@ -32,7 +32,7 @@ class EmergencyBlood(Process):
         
     def Phase1(self):
         for i in range(self.BDPoint.Q):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
         temp_run=self.OrderedPatient
         temp_run.Activate(0.0)
         self._active=0

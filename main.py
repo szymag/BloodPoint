@@ -24,10 +24,11 @@ class Program():
         stepMode=0
         unitsOfBloodAfterInitalyPhase = 0
         subsidiaryFlag = True
-        
-        while(self.Patient.PatientID < 5000):
+        #PAtientID -> patientNumber
+
+        while(self.bloodDonationPoint.PatientNumber < 5000):
             if(self.bloodDonationPoint.SystemTime > 9999 and subsidiaryFlag == True):
-                unitsOfBloodAfterInitalyPhase=self.BloodUnit.BloodID
+                unitsOfBloodAfterInitalyPhase=self.bloodDonationPoint.BloodNumber
                 subsidiaryFlag=False
             # a=
             self.currentProcess=self.bloodDonationPoint.Schedule.GetFirstEvent().process
@@ -45,5 +46,6 @@ class Program():
 
             if(stepMode==True):
                 input()
-
+        print("Czas na fazę początkową = " +  str(self.bloodDonationPoint.InitialPhase))
+        # print("Krew na badania naukowe oddano " + str(self.))
 run=Program()

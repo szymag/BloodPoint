@@ -6,20 +6,21 @@ from EmergencyBlood import EmergencyBlood
 from Blood import Blood
 
 class Patient(Process):
-    PatientID=0
-    active=False
-    ID=0
+    # PatientID=0
+    # active=False
+    # ID=0
     def __init__(self, system):
         super().__init__(system)
         self.name="Pacjet"
         self.BrithTime = self.BDPoint.SystemTime
         self.BloodNeeded = system.Distributions.GetGeometric()
-        # self.PatientID=
+        self.PatientID=self.BDPoint.PatientNumber
         if(self.BloodNeeded==0):
             self.BloodNeeded=1
-        self.ID=self.PatientID
+        self.ID=self.BDPoint.PatientNumber
+        print("Patien number " + str(self.BDPoint.PatientNumber))
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
-            self.PatientID +=1
+            self.BDPoint.PatientNumber +=1
         # self.
     
     def Execute(self):
@@ -49,7 +50,7 @@ class Patient(Process):
         if(len(self.BDPoint.BloodList) != 0):
             while(self.BDPoint.BloodList[0].ExpirationDate < self.BDPoint.SystemTime):
                 self.BDPoint.RemoveBlood()
-                if(len(seld.system.BloodList) == 0):
+                if(len(self.BDPoint.BloodList) == 0):
                     break       
         if(len(self.BDPoint.BloodList) > self.BDPoint.TbLevel and self.BDPoint.EnFlag == False):
             self.BDPoint.EnVariable = Enlargment(self.BDPoint)
@@ -83,7 +84,7 @@ class Patient(Process):
         else:
             temp_run=EmergencyBlood(self,self.BDPoint)
             temp_run.Activate(0.0)
-
+            self.active=False
             print("Zamowiono awaryjnie krew dla Pacjenta o nr ID" + str(self.ID) + " | Potrzebna krew: "+ str(self.BloodNeeded) + " | czas: " + str(self.BDPoint.SystemTime))
 
     def Phase4(self):

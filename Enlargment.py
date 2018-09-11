@@ -27,7 +27,7 @@ class Enlargment(Process):
             self.BDPoint.EnFlag = True
             if((self.BDPoint.SystemTime - self._time)> self.BDPoint.TuTime):
                 print("Oddanie krwi na cele naukowe (rozszerzesnie)")
-                for i in range(self.UnitsOnScience):
+                for i in range(int(self.UnitsOnScience)):
                     self.BDPoint.RemoveBloodScience()
                 if (self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
                     self.IdEnlargment+=1
