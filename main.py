@@ -1,4 +1,4 @@
-import numpy
+# import numpy
 from Patient import Patient
 from bdp import BloodDonationPoint
 from Donor import Donor
@@ -20,22 +20,21 @@ class Program(object):
 
         # self.Patient.Activate(1.0)
         # try:
-        #     stepMode=int(input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
+        #     self.stepMode=int(input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
         # except ValueError:
         #     print("Zla odpowiedz")
 
-        stepMode=0
-        unitsOfBloodAfterInitalyPhase = 0
-        subsidiaryFlag = True
+        self.stepMode=0
+        self.unitsOfBloodAfterInitalyPhase = 0
+        self.subsidiaryFlag = True
         #PAtientID -> patientNumber
 
+    def main_loop(sefl):
         while(Patient._PatientID < 5000):
-
-            if(Patient._PatientID==10):
-                print("dupa")
-            if(self.bloodDonationPoint.SystemTime > 9999 and subsidiaryFlag == True):
-                unitsOfBloodAfterInitalyPhase=BloodUnit._BloodId
-                subsidiaryFlag=False
+            
+            if(self.bloodDonationPoint.SystemTime > 9999 and self.subsidiaryFlag == True):
+                self.unitsOfBloodAfterInitalyPhase=BloodUnit._BloodId
+                self.subsidiaryFlag=False
             # a=
             self.currentProcess=self.bloodDonationPoint.Schedule.GetFirstEvent().process
             self.bloodDonationPoint.SystemTime=self.currentProcess.ProcessEvent.EventTime
@@ -50,7 +49,7 @@ class Program(object):
             print("\n Kolejne:")
             self.bloodDonationPoint.Schedule.Print()
 
-            if(stepMode==True):
+            if(self.stepMode==True):
                 try:
                     input("Press enter to continue")
                 except SyntaxError:
@@ -59,9 +58,10 @@ class Program(object):
         print("Krew na badania naukowe oddano " + str(self.bloodDonationPoint.EnlargmentNumber) + ", w sumie na badania oddano " + str(self.bloodDonationPoint.BloodForScience) + " jednostek krwi.")
         print("Obsluzono " + str(Patient._PatientID) + " pacjentow")
         print("Obsluzono " + str(Donor._DonorID) + " dawcow")
-        print("Przez symulacje bylo " + str(BloodUnit._BloodId - unitsOfBloodAfterInitalyPhase) + " różnych jednostek krwi")
+        print("Przez symulacje bylo " + str(BloodUnit._BloodId - self.unitsOfBloodAfterInitalyPhase) + " różnych jednostek krwi")
         print("Az, " + str(self.bloodDonationPoint.UtilizedBlood) + " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) + " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
-        
+
         
 run=Program()
+run.main_loop()
