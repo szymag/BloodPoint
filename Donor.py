@@ -21,7 +21,7 @@ class Donor(Process):
             
             newDonor=Donor(self.BDPoint)
             newDonor.Activate(self.BDPoint.Distributions.GetExponential(950))
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
 
             print("Aktualny stan jednostek krwi: " + str(len(self.BDPoint.BloodList)))
             activate=False

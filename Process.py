@@ -1,13 +1,14 @@
 # from BloodDonationPoint import *
 from bdp import BloodDonationPoint
-import Event
+from Event import Event
+# import Event
 
-class Process(BloodDonationPoint):
+class Process():
     # BDPoint=0
     def __init__(self,system):
         self.Phase = 0
         self.BDPoint = system
-        self.ProcessEvent = Event.Event(self)
+        self.ProcessEvent = Event(self)
         # print('asd')
 
     def Activate(self,time):

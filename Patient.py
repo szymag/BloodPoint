@@ -7,8 +7,6 @@ from Blood import Blood
 
 class Patient(Process):
     _PatientID=0
-    # active=False
-    # ID=0
     def __init__(self, system):
         super().__init__(system)
         self.name="Pacjet"
@@ -16,12 +14,10 @@ class Patient(Process):
         self.BloodNeeded = self.BDPoint.Distributions.GetGeometric()
         if(self.BloodNeeded==0):
             self.BloodNeeded = 1
-        # Patient._PatientID=self.BDPoint.PatientNumber
         self.ID=Patient._PatientID
         print("Patien number " + str(Patient._PatientID))
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
             Patient._PatientID +=1
-        # self.
     
     def Execute(self):
         self.active=True

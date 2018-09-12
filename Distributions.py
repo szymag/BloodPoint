@@ -31,7 +31,16 @@ class Distributions():
             result = result + 2147483647
         self.Iteration+=1
         return result
-        
+    def GetBloodType(self):
+        Value = self.Generate()
+        result = (float(Value) / 1000) % 1
+        if(result <= 600):
+            result="A"
+        else:
+            result="B"
+        return result
+
+
     def GetGeometric(self):
         i=int(0)
         flag=False

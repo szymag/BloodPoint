@@ -31,7 +31,7 @@ class Blood(Process):
         
     def Phase1(self):
         for i in range(self.BDPoint.N):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
         self._active=False
         print("Dostarczono standardowe zamowinie)")
 

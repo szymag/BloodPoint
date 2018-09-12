@@ -6,8 +6,9 @@ from Enlargment import Enlargment
 from BloodUnit import BloodUnit
 from EmergencyBlood import EmergencyBlood
 from Blood import Blood
+from BloodUnit import BloodUnit
 
-class Program(object):
+class Program():
     empCount = 0
 
     def __init__(self):
@@ -27,7 +28,7 @@ class Program(object):
         #PAtientID -> patientNumber
 
     def MainLoop(self):
-        while(Patient._PatientID < 5000):
+        while(Patient._PatientID < 100):
             
             if(self.bloodDonationPoint.SystemTime > 9999 and self.subsidiaryFlag == True):
                 self.unitsOfBloodAfterInitalyPhase=BloodUnit._BloodId
@@ -58,6 +59,7 @@ class Program(object):
         print("Przez symulacje bylo " + str(BloodUnit._BloodId - self.unitsOfBloodAfterInitalyPhase) + " różnych jednostek krwi")
         print("Az, " + str(self.bloodDonationPoint.UtilizedBlood) + " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) + " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
+        print("Grupa A:" + str(BloodUnit._BloodA) + " Grupa B: " + str(BloodUnit._BloodB))
 
         
 run=Program()
