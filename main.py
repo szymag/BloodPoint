@@ -59,14 +59,10 @@ class Program(object):
         print("Krew na badania naukowe oddano " + str(self.bloodDonationPoint.EnlargmentNumber) + ", w sumie na badania oddano " + str(self.bloodDonationPoint.BloodForScience) + " jednostek krwi.")
         print("Obsluzono " + str(Patient._PatientID) + " pacjentow")
         print("Obsluzono " + str(Donor._DonorID) + " dawcow")
-<<<<<<< HEAD
         print("Przez symulacje bylo " + str(BloodUnit._BloodId - unitsOfBloodAfterInitalyPhase) + " różnych jednostek krwi")
         print("Az, " + str(self.bloodDonationPoint.UtilizedBlood) + " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) + " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
         print("Cos")
         print("Cos2")
         
-=======
-
->>>>>>> origin/master
 run=Program()
