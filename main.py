@@ -12,11 +12,8 @@ class Program(object):
 
     def __init__(self):
         self.bloodDonationPoint = BloodDonationPoint()
-        self.Patient=Patient(self.bloodDonationPoint)
-        self.Patient.Activate(1.0)
-
-        self.Donor=Donor(self.bloodDonationPoint)
-        self.Donor.Activate(1.0)
+        self.Patient=Patient(self.bloodDonationPoint).Activate(1.0)
+        self.Donor=Donor(self.bloodDonationPoint).Activate(1.0)
 
         # self.Patient.Activate(1.0)
         # try:
@@ -29,7 +26,7 @@ class Program(object):
         self.subsidiaryFlag = True
         #PAtientID -> patientNumber
 
-    def main_loop(sefl):
+    def MainLoop(self):
         while(Patient._PatientID < 5000):
             
             if(self.bloodDonationPoint.SystemTime > 9999 and self.subsidiaryFlag == True):
@@ -64,4 +61,4 @@ class Program(object):
 
         
 run=Program()
-run.main_loop()
+run.MainLoop()
