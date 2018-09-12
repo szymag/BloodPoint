@@ -6,7 +6,7 @@ from EmergencyBlood import EmergencyBlood
 from Blood import Blood
 
 class Patient(Process):
-    # PatientID=0
+    _PatientID=0
     # active=False
     # ID=0
     def __init__(self, system):
@@ -14,13 +14,13 @@ class Patient(Process):
         self.name="Pacjet"
         self.BrithTime = self.BDPoint.SystemTime
         self.BloodNeeded = self.BDPoint.Distributions.GetGeometric()
-        self.PatientID=self.BDPoint.PatientNumber
         if(self.BloodNeeded==0):
-            self.BloodNeeded=1
-        self.ID=self.BDPoint.PatientNumber
-        print("Patien number " + str(self.BDPoint.PatientNumber))
+            self.BloodNeeded = 1
+        # Patient._PatientID=self.BDPoint.PatientNumber
+        self.ID=Patient._PatientID
+        print("Patien number " + str(Patient._PatientID))
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
-            self.BDPoint.PatientNumber +=1
+            Patient._PatientID +=1
         # self.
     
     def Execute(self):
@@ -69,7 +69,7 @@ class Patient(Process):
             temp_run=EmergencyBlood(self,self.BDPoint)
             temp_run.Activate(0.0)
             self.active=False
-            print("Zamowiono awaryjnie krew dla pacjenta o nr ID: " + str(self.PatientID) + " Potrzebna krew : " + str(self.BloodNeeded) + " | Czas: " + str(self.BDPoint.SystemTime))
+            print("Zamowiono awaryjnie krew dla pacjenta o nr ID: " + str(Patient._PatientID) + " Potrzebna krew : " + str(self.BloodNeeded) + " | Czas: " + str(self.BDPoint.SystemTime))
         self.Phase=3
     
     def Phase3(self):

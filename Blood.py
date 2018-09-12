@@ -4,7 +4,7 @@ from BloodUnit import BloodUnit
 
 class Blood(Process):
 
-    AmountOfStandardOrders=0
+    _AmountOfStandardOrders=0
     # Time=0
     _active=False
     def __init__(self, system):
@@ -27,11 +27,11 @@ class Blood(Process):
         self._active=0
         print("Zamowiono krew standardowo.")
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
-            self.AmountOfStandardOrders+=1
+            Blood._AmountOfStandardOrders+=1
         
     def Phase1(self):
         for i in range(self.BDPoint.N):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint.SystemTime + self.Time))
         self._active=False
         print("Dostarczono standardowe zamowinie)")
 

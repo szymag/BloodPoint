@@ -11,7 +11,7 @@ class Schedule():
         # self.ev = event
         self.schedule.append(event)
         # print(self.schedule)
-        sorted(self.schedule, key=self.getKey) 
+        self.schedule=sorted(self.schedule, key=self.getKey) 
         # print(self.schedule)
 
     def Print(self):
@@ -21,10 +21,10 @@ class Schedule():
     def GetFirstEvent(self):
         # self.temp=
         a=self.schedule[0]
-        print(len(self.schedule))
+        # print(len(self.schedule))
         del(self.schedule[0])
         
-        print(len(self.schedule))
+        # print(len(self.schedule))
         return(a)
 
 # print("d")

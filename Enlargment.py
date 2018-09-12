@@ -4,7 +4,7 @@ from Distributions import Distributions
 class Enlargment(Process):
     # _time=0
     # UnitsOnScience=0
-    # IdEnlargment=0
+    _IDEnlargment=0
 
     def __init__(self,system):
         super().__init__(system)
@@ -30,8 +30,8 @@ class Enlargment(Process):
                 for i in range(int(self.BDPoint.UnitOnScience)):
                     self.BDPoint.RemoveBloodScience()
                 if (self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
-                    self.IdEnlargment=self.BDPoint.EnlargmentNumber
-                    self.BDPoint.EnlargmentNumber+=1
+                    # self.IdEnlargment=Enlargment._EnlargmentID
+                    Enlargment._IDEnlargment+=1
                 self.Phase = 1
         else:
             self.Phase = 1

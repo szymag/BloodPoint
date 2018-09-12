@@ -2,8 +2,12 @@ import numpy
 from Patient import Patient
 from bdp import BloodDonationPoint
 from Donor import Donor
+from Enlargment import Enlargment
+from BloodUnit import BloodUnit
+from EmergencyBlood import EmergencyBlood
+from Blood import Blood
 
-class Program():
+class Program(object):
     empCount = 0
 
     def __init__(self):
@@ -25,9 +29,12 @@ class Program():
         subsidiaryFlag = True
         #PAtientID -> patientNumber
 
-        while(self.bloodDonationPoint.PatientNumber < 5000):
+        while(Patient._PatientID < 5000):
+
+            if(Patient._PatientID==10):
+                print("dupa")
             if(self.bloodDonationPoint.SystemTime > 9999 and subsidiaryFlag == True):
-                unitsOfBloodAfterInitalyPhase=self.bloodDonationPoint.BloodNumber
+                unitsOfBloodAfterInitalyPhase=BloodUnit._BloodId
                 subsidiaryFlag=False
             # a=
             self.currentProcess=self.bloodDonationPoint.Schedule.GetFirstEvent().process
@@ -44,10 +51,13 @@ class Program():
             self.bloodDonationPoint.Schedule.Print()
 
             if(stepMode==True):
-                input()
+                try:
+                    input("Press enter to continue")
+                except SyntaxError:
+                    pass
         print("Czas na fazę początkową = " +  str(self.bloodDonationPoint.InitialPhase))
         print("Krew na badania naukowe oddano " + str(self.bloodDonationPoint.EnlargmentNumber) + ", w sumie na badania oddano " + str(self.bloodDonationPoint.BloodForScience) + " jednostek krwi.")
-        print("Obsluzono " + str(self.bloodDonationPoint.PatientNumber) + " pacjentow")
-        print("Obsluzono " + str(self.bloodDonationPoint.DonorNumber) + " dawcow")
+        print("Obsluzono " + str(Patient._PatientID) + " pacjentow")
+        print("Obsluzono " + str(Donor._DonorID) + " dawcow")
 
 run=Program()

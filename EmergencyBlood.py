@@ -3,15 +3,14 @@ from Distributions import Distributions
 from BloodUnit import BloodUnit
 
 class EmergencyBlood(Process):
-    OrderedPatient=0
-    Time=0
-    AmoutOfemergency=0
-    _active=0
+    
+    _AmoutOfemergency=0
 
     def __init__(self,orderedPatient,system):
         super().__init__(system)
         self.OrderedPatient=orderedPatient
         self.Time=800
+        self._active=0
 
     def Execute(self):
         self._active=True
@@ -28,11 +27,11 @@ class EmergencyBlood(Process):
         self._active=0
         print("Zamówiono krew awaryjnie")
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
-            self.AmoutOfemergency+=1
+            EmergencyBlood._AmoutOfemergency+=1
         
     def Phase1(self):
         for i in range(self.BDPoint.Q):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint.SystemTime + self.Time))
         temp_run=self.OrderedPatient
         temp_run.Activate(0.0)
         self._active=0
