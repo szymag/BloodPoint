@@ -6,9 +6,10 @@ class EmergencyBlood(Process):
     
     _AmoutOfemergency=0
 
-    def __init__(self,orderedPatient,system):
+    def __init__(self,orderedPatient,system,BloodType):
         super().__init__(system)
         self.OrderedPatient=orderedPatient
+        self.BloodTypeOrder=BloodType
         self.Time=800
         self._active=0
 
@@ -31,7 +32,7 @@ class EmergencyBlood(Process):
         
     def Phase1(self):
         for i in range(self.BDPoint.Q):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time,self.BloodTypeOrder))
         temp_run=self.OrderedPatient
         temp_run.Activate(0.0)
         self._active=0

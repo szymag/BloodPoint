@@ -30,11 +30,11 @@ class Distributions():
         if (result < 0):
             result = result + 2147483647
         self.Iteration+=1
-        return result
+        return int(result)
     def GetBloodType(self):
         Value = self.Generate()
-        result = (float(Value) / 1000) % 1
-        if(result <= 600):
+        result = ((float(Value) / 100) % 1)*100
+        if(result <= 60):
             result="A"
         else:
             result="B"
@@ -44,12 +44,12 @@ class Distributions():
     def GetGeometric(self):
         i=int(0)
         flag=False
-        GeometricValue = int(self.Generate())
+        GeometricValue = self.Generate()
         while (flag != True):
             flag = self.Bernouli(GeometricValue)
             if (flag!= True):
                 i+=1
-            GeometricValue= int(self.Generate())
+            GeometricValue= self.Generate()
         return i
 
     def GetUniform(self):
@@ -64,13 +64,13 @@ class Distributions():
         else:
             return False
 
-    def GetUniformToEnlagmnet(self):
-        Value = int(self.Generate())
+    def GetUniformToEnlagmnet(self):  #convert to 
+        Value = self.Generate()
         result = int((Value % 6) + 5)
         return result
 
     def GetExponential(self,average):
-        Value = float(self.GetUniform())
+        Value = self.GetUniform()
         while(Value==0):
             Value = self.GetUniform()
         Value = -average * math.log(Value)
@@ -79,7 +79,7 @@ class Distributions():
     def GetNormal(self):
         sum = float(0) 
         for i in range(10):
-            r=float(self.Generate())
+            r=self.Generate()
             # x=int(r)
             r=(r/100)%1
             sum=sum+r

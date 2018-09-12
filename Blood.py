@@ -7,9 +7,10 @@ class Blood(Process):
     _AmountOfStandardOrders=0
     # Time=0
     _active=False
-    def __init__(self, system):
+    def __init__(self, system,BloodType):
         super().__init__(system)        
         self.Time=800
+        self.BloodTypeOrder=BloodType
     
     def Execute(self):
         # self._active=True
@@ -31,7 +32,7 @@ class Blood(Process):
         
     def Phase1(self):
         for i in range(self.BDPoint.N):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time,self.BloodTypeOrder))
         self._active=False
         print("Dostarczono standardowe zamowinie)")
 

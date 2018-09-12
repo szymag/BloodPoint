@@ -9,7 +9,8 @@ class BloodDonationPoint():
         self.SystemTime=0.0
         self.Schedule=Schedule.Schedule()
         self.PatientQueue = deque()
-        self.BloodList = []
+        self.BloodListA = []
+        self.BloodListB = []
         self.EnFlag=False
         self.TbLevel=30
         self.TuTime=300
@@ -33,17 +34,28 @@ class BloodDonationPoint():
         return int(time.ExpirationDate)
 
     def AddBlood(self,blood):
-        self.BloodList.append(blood)
-        # self.BloodList.sort()
-        self.BloodList=sorted(self.BloodList, key=self.getBloodKey) 
+        if(blood.BloodType=="A"):
+            self.BloodListA.append(blood)
+            self.BloodListA=sorted(self.BloodListA, key=self.getBloodKey) 
+        else:
+            self.BloodListB.append(blood)
+            self.BloodListB=sorted(self.BloodListB, key=self.getBloodKey) 
     
-    def RemoveBlood(self):
-        print("Usunieto jednostke krwi o ID: ", self.BloodList[0].ID)
-        if(self.SystemTime > self.InitialPhase):
-            self.UtilizedBlood+=1
-        del(self.BloodList[0])
-        self.BloodList=sorted(self.BloodList, key=self.getBloodKey) 
-        
+    def RemoveBlood(self,BloodType):
+        if(BloodType=="A"):
+            print("Usunieto jednostke krwi grupy A o ID: ", self.BloodListA[0].ID)
+            if(self.SystemTime > self.InitialPhase):
+                self.UtilizedBlood+=1
+            del(self.BloodListA[0])
+            self.BloodListA=sorted(self.BloodListA, key=self.getBloodKey) 
+        else:
+            print("Usunieto jednostke krwi grupy B o ID: ", self.BloodListB[0].ID)
+            if(self.SystemTime > self.InitialPhase):
+                self.UtilizedBlood+=1
+            del(self.BloodListB[0])
+            self.BloodListB=sorted(self.BloodListB, key=self.getBloodKey)
+
+
     def RemoveBloodScience(self):
         print("Usunieto SCIENCE jednostkwe krwi o ID: " + str(self.BloodList[0].ID))
         if(self.SystemTime > self.InitialPhase):

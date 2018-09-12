@@ -1,4 +1,3 @@
-# import numpy
 from Patient import Patient
 from bdp import BloodDonationPoint
 from Donor import Donor
@@ -28,7 +27,7 @@ class Program():
         #PAtientID -> patientNumber
 
     def MainLoop(self):
-        while(Patient._PatientID < 100):
+        while(Patient._PatientID < 1000):
             
             if(self.bloodDonationPoint.SystemTime > 9999 and self.subsidiaryFlag == True):
                 self.unitsOfBloodAfterInitalyPhase=BloodUnit._BloodId
@@ -60,6 +59,7 @@ class Program():
         print("Az, " + str(self.bloodDonationPoint.UtilizedBlood) + " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) + " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
         print("Grupa A:" + str(BloodUnit._BloodA) + " Grupa B: " + str(BloodUnit._BloodB))
+        print("Zarejestrowano " + str(Patient._PatientA) + " pacjetow o grupie A i " + str(Patient._PatientA) + " o grupie B.")
 
         
 run=Program()
