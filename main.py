@@ -62,7 +62,6 @@ class Program(object):
         print("Przez symulacje bylo " + str(BloodUnit._BloodId - unitsOfBloodAfterInitalyPhase) + " różnych jednostek krwi")
         print("Az, " + str(self.bloodDonationPoint.UtilizedBlood) + " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) + " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
-        print("Cos")
-        print("Cos2")
+        
         
 run=Program()

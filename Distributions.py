@@ -33,14 +33,14 @@ class Distributions():
         return result
         
     def GetGeometric(self):
-        i=0
+        i=int(0)
         flag=False
-        GeometricValue = self.Generate()
+        GeometricValue = int(self.Generate())
         while (flag != True):
             flag = self.Bernouli(GeometricValue)
             if (flag!= True):
                 i+=1
-            GeometricValue= self.Generate()
+            GeometricValue= int(self.Generate())
         return i
 
     def GetUniform(self):
@@ -56,23 +56,23 @@ class Distributions():
             return False
 
     def GetUniformToEnlagmnet(self):
-        Value = self.Generate()
-        result = (Value / 6) % 5
+        Value = int(self.Generate())
+        result = int((Value % 6) + 5)
         return result
 
     def GetExponential(self,average):
-        Value = self.GetUniform()
+        Value = float(self.GetUniform())
         while(Value==0):
             Value = self.GetUniform()
         Value = -average * math.log(Value)
         return Value
 
     def GetNormal(self):
-        sum = 0 
+        sum = float(0) 
         for i in range(10):
             r=float(self.Generate())
-            x=int(r)
+            # x=int(r)
             r=(r/100)%1
             sum=sum+r
-        result = ((( sum - 5) / (math.sqrt(100/12))) +500 )
+        result = float((( sum - 5) / (math.sqrt(100/12))) +500 )
         return result

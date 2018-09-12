@@ -40,7 +40,7 @@ class BloodDonationPoint():
     def RemoveBlood(self):
         print("Usunieto jednostke krwi o ID: ", self.BloodList[0].ID)
         if(self.SystemTime > self.InitialPhase):
-            self.BloodForScience+=1
+            self.UtilizedBlood+=1
         del(self.BloodList[0])
         self.BloodList=sorted(self.BloodList, key=self.getBloodKey) 
         
