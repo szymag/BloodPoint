@@ -1,37 +1,37 @@
 import math
 
-# import matplotlib.animation as anim
-# import matplotlib.pyplot as plt
+import matplotlib.animation as anim
+import matplotlib.pyplot as plt
 
 
 class Generators():
 
     def __init__(self):
-        self.Iteration = 20001
+        self.seed_id = 123456
         f = open("./Seeds.txt", 'r')
         self.data = f.readlines()
         f.close()
 
-        # o = []
-        # for i in range(6000):
-        #     o.append(self.get_exponential(1700))
-        # # print(o)
-        # plt.hist(o, 50, density=True, facecolor='g', alpha=0.2)
-        # plt.xlabel('Smarts')
-        # plt.ylabel('Probability')
-        # plt.title('Histogram')
-        # plt.show()
+        o = []
+        for _i in range(6000):
+            o.append(self.get_exponential(1700))
+
+        plt.hist(o, 50, density=True, facecolor='g', alpha=0.2)
+        plt.xlabel('Smarts')
+        plt.ylabel('Probability')
+        plt.title('Histogram')
+        plt.show()
 
     def generate_seed(self):
         q = 44488
         a = 48271
         r = 3399
-        x = int(self.data[self.Iteration])
+        x = int(self.data[self.seed_id])
         h = int(x / q)
         result = int((a * (x - (q*h))) - (r * h))
         if(result < 0):
             result = result + 2147483647
-        self.Iteration += 1
+        self.seed_id += 1
         return result
 
     def get_blood_type(self):
