@@ -62,3 +62,4 @@ lib64
 .vscode/settings.json
 .vscode/settings.json
 .vscode/settings.json
+*.json
