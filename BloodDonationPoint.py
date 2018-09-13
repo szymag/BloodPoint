@@ -1,6 +1,6 @@
 from collections import deque
 from Schedule import Schedule
-from Distributions import Distributions
+from Generators import Generators
 
 
 class BloodDonationPoint():
@@ -10,20 +10,20 @@ class BloodDonationPoint():
         self.system_time = 0.0
         self.schedule = Schedule()
         self.patient_queue = deque()
-        self.BloodListA = []
-        self.BloodListB = []
+        self.blood_list_a = []
+        self.blood_list_b = []
         self.EnFlag = False
         self.TbLevel = 30
-        self.TuTime = 300
+        self.Tutime = 300
         self.N = 15
         self.MinimalBlood = 70
         self.Q = 11
         self.UtilizedBlood = 0
         self.BloodForScience = 0
-        self.Distributions = Distributions()
+        self.Generators = Generators()
 
-        self.ReturnedBloodA = 0
-        self.ReturnedBloodB = 0
+        self.returned_blood_A = 0
+        self.returned_blood_B = 0
 
         self.UnitOnScience = 0
 
@@ -31,28 +31,28 @@ class BloodDonationPoint():
         self.busy_flag = 0
 
     def getBloodKey(self, time):
-        return int(time.ExpirationDate)
+        return int(time.expiration_date)
 
-    def AddBlood(self, blood):
-        if(blood.BloodType == "A"):
-            self.BloodListA.append(blood)
-            self.BloodListA = sorted(self.BloodListA, key=self.getBloodKey)
+    def add_blood(self, blood):
+        if(blood.blood_type == "A"):
+            self.blood_list_a.append(blood)
+            self.blood_list_a = sorted(self.blood_list_a, key=self.getBloodKey)
         else:
-            self.BloodListB.append(blood)
-            self.BloodListB = sorted(self.BloodListB, key=self.getBloodKey)
+            self.blood_list_b.append(blood)
+            self.blood_list_b = sorted(self.blood_list_b, key=self.getBloodKey)
 
-    def RemoveBlood(self, BloodType):
-        if(BloodType == "A"):
-            print("Usunieto jednostke krwi grupy A o ID: ",
-                  self.BloodListA[0].ID)
+    def remove_blood(self, blood_type):
+        if(blood_type == "A"):
+            print("Usunieto jednostke krwi grupy A o id: ",
+                  self.blood_list_a[0].id)
             if(self.system_time > self.initial_phase):
                 self.UtilizedBlood += 1
-            del(self.BloodListA[0])
-            self.BloodListA = sorted(self.BloodListA, key=self.getBloodKey)
+            del(self.blood_list_a[0])
+            self.blood_list_a = sorted(self.blood_list_a, key=self.getBloodKey)
         else:
-            print("Usunieto jednostke krwi grupy B o ID: ",
-                  self.BloodListB[0].ID)
+            print("Usunieto jednostke krwi grupy B o id: ",
+                  self.blood_list_b[0].id)
             if(self.system_time > self.initial_phase):
                 self.UtilizedBlood += 1
-            del(self.BloodListB[0])
-            self.BloodListB = sorted(self.BloodListB, key=self.getBloodKey)
+            del(self.blood_list_b[0])
+            self.blood_list_b = sorted(self.blood_list_b, key=self.getBloodKey)

@@ -1,38 +1,37 @@
 from Process import Process
-from BloodUnit import BloodUnit
+from UnitOfBlood import UnitOfBlood
 
 
 class Donor(Process):
-    _DonorID = 0
-    _DonorA = 0
-    _DonorB = 0
+    counter_donor = 0
+    counter_donor_a = 0
+    counter_donor_b = 0
 
     def __init__(self, system):
         super().__init__(system)
         self.name = "Donor"
-        self.BloodType = self.bdp.Distributions.GetBloodType()
-        if(self.BloodType == "A"):
-            Donor._DonorA += 1
+        self.blood_type = self.bdp.Generators.get_blood_type()
+        if(self.blood_type == "A"):
+            Donor.counter_donor_a += 1
         else:
-            Donor._DonorB += 1
-        self.Time = 1000
-        self.donorID = Donor._DonorID
+            Donor.counter_donor_b += 1
+        self.time = 1000
+        self.donorID = Donor.counter_donor
 
-    def execute()(self):
+    def execute(self):
         activate = True
         while(activate):
             if(self.bdp.system_time > self.bdp.initial_phase):
-                Donor._DonorID += 1
+                Donor.counter_donor += 1
             print("Pojawienie sie dawcy nr " + str(self.donorID) +
-                  " o grupie krwi " + str(self.BloodType) + "w systemie.")
+                  " o grupie krwi " + str(self.blood_type) + "w systemie.")
 
-            newDonor = Donor(self.bdp)
-            newDonor.activate(self.bdp.Distributions.get_exponential(950))
-            self.bdp.AddBlood(BloodUnit(
-                self.bdp, self.bdp.system_time + self.Time, self.BloodType, "Standard"))
+            Donor(self.bdp).activate(self.bdp.Generators.get_exponential(950))
+            self.bdp.add_blood(UnitOfBlood(
+                self.bdp, self.bdp.system_time + self.time, self.blood_type, "Standard"))
 
             print("Aktualny stan jednostek krwi: " +
-                  str(len(self.bdp.BloodListA)+len(self.bdp.BloodListB)))
+                  str(len(self.bdp.blood_list_a)+len(self.bdp.blood_list_b)))
             activate = False
 
     def ToString(self):

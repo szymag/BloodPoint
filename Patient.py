@@ -4,151 +4,147 @@ from Blood import Blood
 
 
 class Patient(Process):
-    patient_counter = 0
-    _PatientA = 0
-    _PatientB = 0
+    counter_patient = 0
+    counter_patient_a = 0
+    counter_patient_b = 0
 
     def __init__(self, bdp):
         super().__init__(bdp)
         self.name = "Pacjet"
-        self.BrithTime = self.bdp.system_time
-        self.BloodType = self.bdp.Distributions.GetBloodType()
-        if(self.BloodType == "A"):
-            Patient._PatientA += 1
+        # self.Brithtime = self.bdp.system_time
+        self.blood_type = self.bdp.Generators.get_blood_type()
+        if(self.blood_type == "A"):
+            Patient.counter_patient_a += 1
         else:
-            Patient._PatientB += 1
-        self.BloodNeeded = self.bdp.Distributions.GetGeometric()
-        if(self.BloodNeeded == 0):
-            self.BloodNeeded = 1
-        self.ID = Patient.patient_counter
+            Patient.counter_patient_b += 1
+        self.blood_needed = self.bdp.Generators.get_geometric()
+        if(self.blood_needed == 0):
+            self.blood_needed = 1
+        self.id = Patient.counter_patient
         print("Do bazy dodano nowego pacjenta numer " +
-              str(self.ID) + " o grupie krwi: " + str(self.BloodType))
+              str(self.id) + " o grupie krwi: " + str(self.blood_type))
         if(self.bdp.system_time > self.bdp.initial_phase):
-            Patient.patient_counter += 1
+            Patient.counter_patient += 1
 
-    def execute()(self):
+    def execute(self):
         self.active = True
         while(self.active):
 
-            if(self.Phase == 0):
-                self.Phase0()
-            elif(self.Phase == 1):
-                self.Phase1()
-            elif(self.Phase == 2):
-                self.Phase2()
-            elif(self.Phase == 3):
-                self.Phase3()
-            elif(self.Phase == 4):
-                self.Phase4()
+            if(self.phase == 0):
+                self.phase0()
+            elif(self.phase == 1):
+                self.phase1()
+            elif(self.phase == 2):
+                self.phase2()
+            elif(self.phase == 3):
+                self.phase3()
+            elif(self.phase == 4):
+                self.phase4()
 
-    def Phase0(self):
+    def phase0(self):
         Patient(self.bdp).activate(
-            self.bdp.Distributions.get_exponential(250))
+            self.bdp.Generators.get_exponential(250))
         self.bdp.patient_queue.append(self)
-        print("dodatno do kolejki pacjenta ", self.ID)
-        self.Phase = 1
+        print("dodatno do kolejki pacjenta ", self.id)
+        self.phase = 1
         self.active = False
 
-    def Phase1(self):
-        if(len(self.bdp.BloodListA) != 0):
+    def phase1(self):
+        if(len(self.bdp.blood_list_a) != 0):
             # USUWANIE PRZETERMINOWANEJ KRWI Beg
-            while(self.bdp.BloodListA[0].ExpirationDate < self.bdp.system_time):
-                self.bdp.RemoveBlood("A")
-                if(len(self.bdp.BloodListA) == 0):
+            while(self.bdp.blood_list_a[0].expiration_date < self.bdp.system_time):
+                self.bdp.remove_blood("A")
+                if(len(self.bdp.blood_list_a) == 0):
                     break
             deletelist = []
-            for blood in self.bdp.BloodListA:
-                # a=self.bdp.Distributions.GetBLoodReturnTime()
-                if(blood.OrderType == "Emergency"):
-                    a = blood.BloodTime
-                    b = (self.bdp.Distributions.GetBLoodReturnTime())
+            for blood in self.bdp.blood_list_a:
+                # a=self.bdp.Generators.get_blood_returning_time()
+                if(blood.order_type == "Emergency"):
+                    a = blood.blood_time
+                    b = (self.bdp.Generators.get_blood_returning_time())
                     if(a+b <= + self.bdp.system_time):
                         deletelist.append(blood)
-                        print("Zwrocono krew grupy " + blood.BloodType +
-                              " z zamowienia awaryjnego o ID:" + str(blood.ID))
-                        self.bdp.ReturnedBloodA += 1
+                        print("Zwrocono krew grupy " + blood.blood_type +
+                              " z zamowienia awaryjnego o ID:" + str(blood.id))
+                        self.bdp.returned_blood_A += 1
             for blood in deletelist:
-                self.bdp.BloodListA.remove(blood)
-                # del(self.bdp.BloodListA[blood_i])
+                self.bdp.blood_list_a.remove(blood)
+                # del(self.bdp.blood_list_a[blood_i])
 
-        if(len(self.bdp.BloodListB) != 0):
-            while(self.bdp.BloodListB[0].ExpirationDate < self.bdp.system_time):
-                self.bdp.RemoveBlood("B")
-                if(len(self.bdp.BloodListB) == 0):
+        if(len(self.bdp.blood_list_b) != 0):
+            while(self.bdp.blood_list_b[0].expiration_date < self.bdp.system_time):
+                self.bdp.remove_blood("B")
+                if(len(self.bdp.blood_list_b) == 0):
                     break
             deletelist = []
-            for blood in self.bdp.BloodListB:
-                    # a=self.bdp.Distributions.GetBLoodReturnTime()
-                if(blood.OrderType == "Emergency"):
-                    a = blood.BloodTime
-                    b = (self.bdp.Distributions.GetBLoodReturnTime())
+            for blood in self.bdp.blood_list_b:
+                    # a=self.bdp.Generators.get_blood_returning_time()
+                if(blood.order_type == "Emergency"):
+                    a = blood.blood_time
+                    b = (self.bdp.Generators.get_blood_returning_time())
                     if(a+b <= + self.bdp.system_time):
                         deletelist.append(blood)
-                        print("Zwrocono krew grupy " + blood.BloodType +
-                              " z zamowienia awaryjnego o ID:" + str(blood.ID))
-                        self.bdp.ReturnedBloodB += 1
+                        print("Zwrocono krew grupy " + blood.blood_type +
+                              " z zamowienia awaryjnego o ID:" + str(blood.id))
+                        self.bdp.returned_blood_B += 1
             for blood in deletelist:
-                self.bdp.BloodListB.remove(blood)
+                self.bdp.blood_list_b.remove(blood)
             # USUWANIE PRZETERMINOWANEJ KRWI End
 
-        if(len(self.bdp.BloodListA) < self.bdp.MinimalBlood):
-            temp_run = Blood(self.bdp, "A")
-            temp_run.activate(0.0)
+        if(len(self.bdp.blood_list_a) < self.bdp.MinimalBlood):
+            Blood(self.bdp, "A").activate(0.0)
             pass
 
-        if(len(self.bdp.BloodListB) < self.bdp.MinimalBlood):
-            temp_run = Blood(self.bdp, "B")
-            temp_run.activate(0.0)
+        if(len(self.bdp.blood_list_b) < self.bdp.MinimalBlood):
+            Blood(self.bdp, "B").activate(0.0)
             pass
 
-        self.Phase = 2
+        self.phase = 2
 
-    def Phase2(self):
-        if(self.BloodType == "A" and len(self.bdp.BloodListA) < self.BloodNeeded):
-            temp_run = EmergencyBlood(self, self.bdp, self.BloodType)
-            temp_run.activate(0.0)
+    def phase2(self):
+        if(self.blood_type == "A" and len(self.bdp.blood_list_a) < self.blood_needed):
+            EmergencyBlood(self, self.bdp, self.blood_type).activate(0.0)
             self.active = False
-            print("Zamowiono awaryjnie krew grupy A dla pacjenta o nr ID: " + str(self.ID) +
-                  ". Potrzebna liczba jednostek krwi:" + str(self.BloodNeeded) + " | Czas: " + str(self.bdp.system_time))
+            print("Zamowiono awaryjnie krew grupy A dla pacjenta o nr ID: " + str(self.id) +
+                  ". Potrzebna liczba jednostek krwi:" + str(self.blood_needed) + " | Czas: " + str(self.bdp.system_time))
 
-        if(self.BloodType == "B" and len(self.bdp.BloodListB) < self.BloodNeeded):
-            temp_run = EmergencyBlood(self, self.bdp, self.BloodType)
-            temp_run.activate(0.0)
+        if(self.blood_type == "B" and len(self.bdp.blood_list_b) < self.blood_needed):
+            EmergencyBlood(self, self.bdp, self.blood_type).activate(0.0)
             self.active = False
-            print("Zamowiono awaryjnie krew grupy B dla pacjenta o nr ID: " + str(self.ID) +
-                  ". Potrzebna liczba jednostek krwi: " + str(self.BloodNeeded) + " | Czas: " + str(self.bdp.system_time))
+            print("Zamowiono awaryjnie krew grupy B dla pacjenta o nr ID: " + str(self.id) +
+                  ". Potrzebna liczba jednostek krwi: " + str(self.blood_needed) + " | Czas: " + str(self.bdp.system_time))
 
-        self.Phase = 3
+        self.phase = 3
 
-    def Phase3(self):
-        if(self.BloodType == "A" and self.BloodNeeded < len(self.bdp.BloodListA)):
-            print("Pacjent od nr ID" + str(self.ID) + "otrzymal " +
-                  str(self.BloodNeeded) + " jednostek grupy typu A")
-            for _i in range(self.BloodNeeded):
-                del(self.bdp.BloodListA[0])
-            print("Pacjent o nr ID " + str(self.ID) + " wyszedl.")
+    def phase3(self):
+        if(self.blood_type == "A" and self.blood_needed < len(self.bdp.blood_list_a)):
+            print("Pacjent od nr ID" + str(self.id) + "otrzymal " +
+                  str(self.blood_needed) + " jednostek grupy typu A")
+            for _i in range(self.blood_needed):
+                del(self.bdp.blood_list_a[0])
+            print("Pacjent o nr ID " + str(self.id) + " wyszedl.")
             self.bdp.busy_flag = 0
             self.active = False
-            self.Phase = 4
+            self.phase = 4
 
-        elif(self.BloodType == "B" and self.BloodNeeded < len(self.bdp.BloodListB)):
-            print("Pacjent od nr ID" + str(self.ID) + "otrzymal " +
-                  str(self.BloodNeeded) + " jednostek krwi typu B")
-            for _i in range(self.BloodNeeded):
-                del(self.bdp.BloodListB[0])
-            print("Pacjent o nr ID " + str(self.ID) + " wyszedl.")
+        elif(self.blood_type == "B" and self.blood_needed < len(self.bdp.blood_list_b)):
+            print("Pacjent od nr ID" + str(self.id) + "otrzymal " +
+                  str(self.blood_needed) + " jednostek krwi typu B")
+            for _i in range(self.blood_needed):
+                del(self.bdp.blood_list_b[0])
+            print("Pacjent o nr ID " + str(self.id) + " wyszedl.")
             self.bdp.busy_flag = 0
             self.active = False
-            self.Phase = 4
+            self.phase = 4
 
         else:
-            temp_run = EmergencyBlood(self, self.bdp, self.BloodType)
+            temp_run = EmergencyBlood(self, self.bdp, self.blood_type)
             temp_run.activate(0.0)
             self.active = False
-            print("Zamowiono awaryjnie krew grupy" + self.BloodType + "dla Pacjenta o nr ID" + str(self.ID) +
-                  " | Potrzeba " + str(self.BloodNeeded) + " jednostek krwi. | Czas zdarzenia : " + str(self.bdp.system_time))
+            print("Zamowiono awaryjnie krew grupy" + self.blood_type + "dla Pacjenta o nr ID" + str(self.id) +
+                  " | Potrzeba " + str(self.blood_needed) + " jednostek krwi. | Czas zdarzenia : " + str(self.bdp.system_time))
 
-    def Phase4(self):
+    def phase4(self):
         self.bdp.busy_flag = False
         if(len(self.bdp.patient_queue) != 0):
             self.active = True
@@ -156,6 +152,4 @@ class Patient(Process):
             self.active = False
 
     def ToString(self):
-        return("Pacjent od nr ID : " + str(self.ID) + " | czas: " + str(self.proces_event.event_time))
-
-
+        return("Pacjent od nr ID : " + str(self.id) + " | czas: " + str(self.proces_event.event_time))

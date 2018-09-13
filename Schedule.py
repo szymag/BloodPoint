@@ -13,8 +13,8 @@ class Schedule():
         self.schedule = sorted(self.schedule, key=self.getKey)
 
     def print_schedule(self):
-        for value in self.schedule:
-            print(value.process.ToString())
+        for var in self.schedule:
+            print(var.process.ToString())
 
     def get_first_event(self):
         a = self.schedule[0]

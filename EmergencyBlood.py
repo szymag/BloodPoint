@@ -1,46 +1,45 @@
 from Process import Process
-from Distributions import Distributions
-from BloodUnit import BloodUnit
+from Generators import Generators
+from UnitOfBlood import UnitOfBlood
 
 
 class EmergencyBlood(Process):
 
-    _AmoutOfemergency = 0
+    counter_emergency = 0
 
-    def __init__(self, orderedPatient, system, BloodType):
-        super().__init__(system)
-        self.OrderedPatient = orderedPatient
-        self.BloodTypeOrder = BloodType
-        self.Time = 800
-        self._active = 0
+    def __init__(self, ordering_patient, bdp, blood_type):
+        super().__init__(bdp)
+        self.ordering_patient = ordering_patient
+        self.blood_type_order = blood_type
+        self.time = 800
+        self.active = 0
 
-    def execute()(self):
-        self._active = True
-        while(self._active):
+    def execute(self):
+        self.active = True
+        while(self.active):
 
-            if(self.Phase == 0):
-                self.Phase0()
-            elif(self.Phase == 1):
-                self.Phase1()
+            if(self.phase == 0):
+                self.phase0()
+            elif(self.phase == 1):
+                self.phase1()
 
-    def Phase0(self):
-        self.activate(Distributions().get_normal())
-        self.Phase = 1
-        self._active = 0
-        print("Zamówiono krew awaryjnie")
+    def phase0(self):
+        self.activate(Generators().get_normal())
+        self.phase = 1
+        self.active = 0
+        print("Zamowiono krew awaryjnie!")
         if(self.bdp.system_time > self.bdp.initial_phase):
-            EmergencyBlood._AmoutOfemergency += 1
+            EmergencyBlood.counter_emergency += 1
 
-    def Phase1(self):
+    def phase1(self):
         for _i in range(self.bdp.Q):
-            self.bdp.AddBlood(BloodUnit(
-                self.bdp, self.bdp.system_time + self.Time, self.BloodTypeOrder, "Emergency"))
-        temp_run = self.OrderedPatient
-        temp_run.activate(0.0)
-        self._active = 0
+            self.bdp.add_blood(UnitOfBlood(
+                self.bdp, self.bdp.system_time + self.time, self.blood_type_order, "Emergency"))
+        self.ordering_patient.activate(0.0)
+        self.active = 0
 
         print("Dojechalo zamowienie awaryjne dla pacjenta nr " +
-              str(self.OrderedPatient.ID) + ".")
+              str(self.ordering_patient.id) + "!")
 
     def ToString(self):
-        return("Awaryjne zamowienie dla pacjetna o ID: " + str(self.OrderedPatient.ID) + "| czas: " + str(self.proces_event.event_time))
+        return("Uwaga! Awaryjne zamowienie dla pacjetna o ID: " + str(self.ordering_patient.id) + "! Czas systemu: " + str(self.proces_event.event_time))

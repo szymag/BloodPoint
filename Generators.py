@@ -1,10 +1,10 @@
 import math
 
-import matplotlib.animation as anim
-import matplotlib.pyplot as plt
+# import matplotlib.animation as anim
+# import matplotlib.pyplot as plt
 
 
-class Distributions():
+class Generators():
 
     def __init__(self):
         self.Iteration = 20001
@@ -22,7 +22,7 @@ class Distributions():
         # plt.title('Histogram')
         # plt.show()
 
-    def Generate(self):
+    def generate_seed(self):
         q = 44488
         a = 48271
         r = 3399
@@ -34,54 +34,51 @@ class Distributions():
         self.Iteration += 1
         return result
 
-    def GetBloodType(self):
-        Value = self.Generate()
-        result = ((float(Value) / 100) % 1)*100
+    def get_blood_type(self):
+        var = self.generate_seed()
+        result = ((float(var) / 100) % 1)*100
         if(result <= 60):
             result = "A"
         else:
             result = "B"
         return result
 
-    def GetGeometric(self):
+    def get_geometric(self):
         i = int(0)
         flag = False
-        GeometricValue = self.Generate()
+        Geometricvar = self.generate_seed()
         while (flag != True):
-            flag = self.Bernouli(GeometricValue)
+            flag = self.get_bernoulli(Geometricvar)
             if (flag != True):
                 i += 1
-            GeometricValue = self.Generate()
+            Geometricvar = self.generate_seed()
         return i
 
-    def GetUniform(self):
-        Value = self.Generate()
-        result = (float(Value) / 100) % 1
+    def get_uniform(self):
+        var = self.generate_seed()
+        result = (float(var) / 100) % 1
         return result
 
-    def Bernouli(self, randomVariable):
-        BernouliValue = self.GetUniform()
-        if (BernouliValue < 0.2):  # W=0.2 wynika ze sredniej potrzebnej do tego zadania
+    def get_bernoulli(self, randomVariable):
+        get_bernoullivar = self.get_uniform()
+        if (get_bernoullivar < 0.2):  # W=0.2 wynika ze sredniej potrzebnej do tego zadania
             return True
         else:
             return False
 
-    def GetBLoodReturnTime(self):
-        Value = self.Generate()
-        result = float((100*((float(Value) / 100) % 1)/1.98))+150
+    def get_blood_returning_time(self):
+        var = self.generate_seed()
+        result = float((100*((float(var) / 100) % 1)/1.98))+150
         return result
 
     def get_exponential(self, average):
-        Value = self.GetUniform()
-        while(Value == 0):
-            Value = self.GetUniform()
-        return(-average * math.log(Value))
+        var = self.get_uniform()
+        while(var == 0):
+            var = self.get_uniform()
+        return(-average * math.log(var))
 
     def get_normal(self):
         sum_i = 0.0
         for _i in range(10):
-            sum_i += (self.Generate()/100) % 1
+            sum_i += (self.generate_seed()/100) % 1
         return float(((sum_i - 5) / (math.sqrt(100/12))) + 500)
-
-
-a = Distributions()

@@ -1,7 +1,7 @@
 from Patient import Patient
 from BloodDonationPoint import BloodDonationPoint
 from Donor import Donor
-from BloodUnit import BloodUnit
+from UnitOfBlood import UnitOfBlood
 from EmergencyBlood import EmergencyBlood
 from Blood import Blood
 
@@ -19,27 +19,24 @@ class Main():
         #     print("Zla odpowiedz")
 
         self.stepMode = 0
-
         self.units_of_blood_after_ini_phase = 0
-        self.units_of_bloodA_after_ini_phase = 0
-        self.units_of_bloodB_after_ini_phase = 0
-
+        self.units_ofcounter_blood_id_a_after_ini_phase = 0
+        self.units_ofcounter_blood_id_b_after_ini_phase = 0
         self.subsidiary_flag = True
 
     def main_loop(self):
-        while(Patient.patient_counter < 2000):
+        while(Patient.counter_patient < 2000):
             if(self.bdp.system_time > 9999 and self.subsidiary_flag == True):
-                self.units_of_blood_after_ini_phase = BloodUnit._BloodId
-                self.units_of_bloodA_after_ini_phase = BloodUnit._BloodA
-                self.units_of_bloodB_after_ini_phase = BloodUnit._BloodB
+                self.units_of_blood_after_ini_phase = UnitOfBlood.counter_blood_id
+                self.units_ofcounter_blood_id_a_after_ini_phase = UnitOfBlood.counter_blood_id_a
+                self.units_ofcounter_blood_id_b_after_ini_phase = UnitOfBlood.counter_blood_id_b
                 self.subsidiary_flag = False
-            self.currentProcess = self.bdp.schedule.get_first_event().process
-            self.bdp.system_time = self.currentProcess.proces_event.event_time
+            self.current_process = self.bdp.schedule.get_first_event().process
+            self.bdp.system_time = self.current_process.proces_event.event_time
             print("Czas " + str(self.bdp.system_time))
-            self.currentProcess.execute()
+            self.current_process.execute()
             if(len(self.bdp.patient_queue) != 0 and self.bdp.busy_flag == False):
-                job = self.bdp.patient_queue.popleft()
-                job.activate(0.0)
+                self.bdp.patient_queue.popleft().activate(0.0)
             print("Nowe zdarzenie \r \n \t")
             self.bdp.schedule.print_schedule()
 
@@ -50,18 +47,18 @@ class Main():
                     pass
         print("Czas na fazę początkową = " +
               str(self.bdp.initial_phase))
-        print("Obsluzono " + str(Patient.patient_counter) + " pacjentow")
-        print("Obsluzono " + str(Donor._DonorID) + " dawcow")
+        print("Obsluzono " + str(Patient.counter_patient) + " pacjentow")
+        print("Obsluzono " + str(Donor.counter_donor) + " dawcow")
         print("Przez symulacje bylo " +
-              str(BloodUnit._BloodId) + " różnych jednostek krwi")
+              str(UnitOfBlood.counter_blood_id) + " różnych jednostek krwi")
         print("Az, " + str(self.bdp.UtilizedBlood) +
               " zostało zutylizowanych")
-        print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) +
-              " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
-        print("Grupa A:" + str(BloodUnit._BloodA) +
-              " Grupa B: " + str(BloodUnit._BloodB))
-        print("Zarejestrowano " + str(Patient._PatientA) +
-              " pacjetow o grupie A i " + str(Patient._PatientB) + " o grupie B.")
+        print("Krew zamowiono awaryjnie " + str(EmergencyBlood.counter_emergency) +
+              " razy, a standardowo " + str(Blood.counter_standard_order))
+        print("Grupa A:" + str(UnitOfBlood.counter_blood_id_a) +
+              " Grupa B: " + str(UnitOfBlood.counter_blood_id_b))
+        print("Zarejestrowano " + str(Patient.counter_patient_a) +
+              " pacjetow o grupie A i " + str(Patient.counter_patient_b) + " o grupie B.")
 
 
 run = Main()

@@ -1,44 +1,45 @@
 from Process import Process
-from Distributions import Distributions
-from BloodUnit import BloodUnit
+from Generators import Generators
+from UnitOfBlood import UnitOfBlood
 
 
 class Blood(Process):
 
-    _AmountOfStandardOrders = 0
-    _active = False
+    counter_standard_order = 0
+    active = False
 
-    def __init__(self, system, BloodType):
+    def __init__(self, system, blood_type):
         super().__init__(system)
-        self.Time = 800
-        self.BloodTypeOrder = BloodType
+        self.time = 800
+        self.blood_type_order = blood_type
 
-    def execute()(self):
-        self._active = True
-        while(self._active):
+    def execute(self):
+        self.active = True
+        while(self.active):
 
-            if(self.Phase == 0):
-                self.Phase0()
-            elif(self.Phase == 1):
-                self.Phase1()
+            if(self.phase == 0):
+                self.phase0()
+            elif(self.phase == 1):
+                self.phase1()
 
-    def Phase0(self):
-        self.activate(Distributions().get_exponential(1700))
-        self.Phase = 1
-        self._active = 0
+    def phase0(self):
+        self.activate(Generators().get_exponential(1700))
+        self.phase = 1
+        self.active = 0
         print("Zamowiono krew grupy " +
-              self.BloodTypeOrder + " metoda standardowa.")
+              self.blood_type_order + " metoda standardowa.")
         if(self.bdp.system_time > self.bdp.initial_phase):
-            Blood._AmountOfStandardOrders += 1
+            Blood.counter_standard_order += 1
 
-    def Phase1(self):
-        for i in range(self.bdp.N):
-            self.bdp.AddBlood(BloodUnit(
-                self.bdp, self.bdp.system_time + self.Time, self.BloodTypeOrder, "Standard"))
-            print("Zamawiam Standardowo krew nr " + str(i))
-        self._active = False
+    def phase1(self):
+        for _i in range(self.bdp.N):
+            self.bdp.add_blood(UnitOfBlood(
+                self.bdp, self.bdp.system_time + self.time, self.blood_type_order, "Standard"))
+            print("Zamawiam krew grupy " +
+                  self.blood_type_order + " w trybie standardowym.")
+        self.active = False
         print("Dostarczono standardowe zamowinie na krew grupy " +
-              self.BloodTypeOrder)
+              self.blood_type_order + ".")
 
     def ToString(self):
         return("Standardowe zamowienie | czas: " + str(self.proces_event.event_time))
