@@ -8,7 +8,7 @@ class Generators():
 
     def __init__(self):
         self.Iteration = 20001
-        f = open("./Kernels.txt", 'r')
+        f = open("./Seeds.txt", 'r')
         self.data = f.readlines()
         f.close()
 
