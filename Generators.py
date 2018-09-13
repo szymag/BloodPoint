@@ -19,7 +19,8 @@ class Generators():
         # plt.hist(o, 50, density=True, facecolor='g', alpha=0.2)
         # plt.xlabel('Smarts')
         # plt.ylabel('Probability')
-        # plt.title('Histogram')
+        # plt.title('Histogram') 
+        
         # plt.show()
 
     def generate_seed(self):
