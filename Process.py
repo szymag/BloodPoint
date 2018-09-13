@@ -10,4 +10,4 @@ class Process():
 
     def activate(self, time):
         self.proces_event.event_time = self.bdp.system_time+time
-        self.bdp.schedule.Insert(self.proces_event)
+        self.bdp.schedule.insert(self.proces_event)

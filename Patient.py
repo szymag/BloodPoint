@@ -91,11 +91,11 @@ class Patient(Process):
                 self.bdp.blood_list_b.remove(blood)
             # USUWANIE PRZETERMINOWANEJ KRWI End
 
-        if(len(self.bdp.blood_list_a) < self.bdp.MinimalBlood):
+        if(len(self.bdp.blood_list_a) < self.bdp.minimal_blood):
             Blood(self.bdp, "A").activate(0.0)
             pass
 
-        if(len(self.bdp.blood_list_b) < self.bdp.MinimalBlood):
+        if(len(self.bdp.blood_list_b) < self.bdp.minimal_blood):
             Blood(self.bdp, "B").activate(0.0)
             pass
 
@@ -151,5 +151,5 @@ class Patient(Process):
         else:
             self.active = False
 
-    def ToString(self):
+    def get_process_info(self):
         return("Pacjent od nr ID : " + str(self.id) + " | czas: " + str(self.proces_event.event_time))

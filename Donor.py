@@ -34,5 +34,5 @@ class Donor(Process):
                   str(len(self.bdp.blood_list_a)+len(self.bdp.blood_list_b)))
             activate = False
 
-    def ToString(self):
+    def get_process_info(self):
         return("Dawca od nr ID: " + str(self.name) + " " + str(self.donorID) + " | czas: " + str(self.proces_event.event_time))

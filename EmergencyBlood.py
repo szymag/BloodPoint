@@ -32,7 +32,7 @@ class EmergencyBlood(Process):
             EmergencyBlood.counter_emergency += 1
 
     def phase1(self):
-        for _i in range(self.bdp.Q):
+        for _i in range(self.bdp.q):
             self.bdp.add_blood(UnitOfBlood(
                 self.bdp, self.bdp.system_time + self.time, self.blood_type_order, "Emergency"))
         self.ordering_patient.activate(0.0)
@@ -41,5 +41,5 @@ class EmergencyBlood(Process):
         print("Dojechalo zamowienie awaryjne dla pacjenta nr " +
               str(self.ordering_patient.id) + "!")
 
-    def ToString(self):
+    def get_process_info(self):
         return("Uwaga! Awaryjne zamowienie dla pacjetna o ID: " + str(self.ordering_patient.id) + "! Czas systemu: " + str(self.proces_event.event_time))

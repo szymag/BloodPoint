@@ -12,13 +12,13 @@ class Main():
         self.patient = Patient(self.bdp).activate(1.0)
         self.donor = Donor(self.bdp).activate(1.0)
 
-        # self.patient.activate(1.0)
-        # try:
-        #     self.stepMode=int(input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
-        # except ValueError:
-        #     print("Zla odpowiedz")
+        self.patient.activate(1.0)
+        try:
+            self.stepMode = int(
+                input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
+        except ValueError:
+            print("Zla odpowiedz")
 
-        self.stepMode = 0
         self.units_of_blood_after_ini_phase = 0
         self.units_ofcounter_blood_id_a_after_ini_phase = 0
         self.units_ofcounter_blood_id_b_after_ini_phase = 0
@@ -51,7 +51,7 @@ class Main():
         print("Obsluzono " + str(Donor.counter_donor) + " dawcow")
         print("Przez symulacje bylo " +
               str(UnitOfBlood.counter_blood_id) + " różnych jednostek krwi")
-        print("Az, " + str(self.bdp.UtilizedBlood) +
+        print("Az, " + str(self.bdp.utilized_blood) +
               " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood.counter_emergency) +
               " razy, a standardowo " + str(Blood.counter_standard_order))

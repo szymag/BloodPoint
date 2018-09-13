@@ -6,12 +6,13 @@ from UnitOfBlood import UnitOfBlood
 class Blood(Process):
 
     counter_standard_order = 0
-    active = False
 
-    def __init__(self, system, blood_type):
-        super().__init__(system)
+
+    def __init__(self, bdp, blood_type):
+        super().__init__(bdp)
         self.time = 800
         self.blood_type_order = blood_type
+        self.active = False
 
     def execute(self):
         self.active = True
@@ -32,7 +33,7 @@ class Blood(Process):
             Blood.counter_standard_order += 1
 
     def phase1(self):
-        for _i in range(self.bdp.N):
+        for _i in range(self.bdp.n):
             self.bdp.add_blood(UnitOfBlood(
                 self.bdp, self.bdp.system_time + self.time, self.blood_type_order, "Standard"))
             print("Zamawiam krew grupy " +
@@ -41,5 +42,5 @@ class Blood(Process):
         print("Dostarczono standardowe zamowinie na krew grupy " +
               self.blood_type_order + ".")
 
-    def ToString(self):
+    def get_process_info(self):
         return("Standardowe zamowienie | czas: " + str(self.proces_event.event_time))
