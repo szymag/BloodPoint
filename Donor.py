@@ -27,7 +27,7 @@ class Donor(Process):
                   " o grupie krwi " + str(self.BloodType) + "w systemie.")
 
             newDonor = Donor(self.BDPoint)
-            newDonor.Activate(self.BDPoint.Distributions.GetExponential(950))
+            newDonor.Activate(self.BDPoint.Distributions.get_exponential(950))
             self.BDPoint.AddBlood(BloodUnit(
                 self.BDPoint, self.BDPoint.SystemTime + self.Time, self.BloodType, "Standard"))
 

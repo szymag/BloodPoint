@@ -24,7 +24,7 @@ class EmergencyBlood(Process):
                 self.Phase1()
 
     def Phase0(self):
-        self.Activate(Distributions().GetNormal())
+        self.Activate(Distributions().get_normal())
         self.Phase = 1
         self._active = 0
         print("Zamówiono krew awaryjnie")
@@ -32,7 +32,7 @@ class EmergencyBlood(Process):
             EmergencyBlood._AmoutOfemergency += 1
 
     def Phase1(self):
-        for i in range(self.BDPoint.Q):
+        for _i in range(self.BDPoint.Q):
             self.BDPoint.AddBlood(BloodUnit(
                 self.BDPoint, self.BDPoint.SystemTime + self.Time, self.BloodTypeOrder, "Emergency"))
         temp_run = self.OrderedPatient

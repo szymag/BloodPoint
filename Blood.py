@@ -23,7 +23,7 @@ class Blood(Process):
                 self.Phase1()
 
     def Phase0(self):
-        self.Activate(Distributions().GetExponential(1700))
+        self.Activate(Distributions().get_exponential(1700))
         self.Phase = 1
         self._active = 0
         print("Zamowiono krew grupy " +

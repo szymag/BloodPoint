@@ -1,16 +1,16 @@
 from Patient import Patient
-from BloodDonationPoint import BloodDonationPoint
+from BloodBank import blood_bank
 from Donor import Donor
 from BloodUnit import BloodUnit
 from EmergencyBlood import EmergencyBlood
 from Blood import Blood
 
 
-class Program():
+class Main():
     def __init__(self):
-        self.bloodDonationPoint = BloodDonationPoint()
-        self.Patient = Patient(self.bloodDonationPoint).Activate(1.0)
-        self.Donor = Donor(self.bloodDonationPoint).Activate(1.0)
+        self.blood_bank = blood_bank()
+        self.Patient = Patient(self.blood_bank).Activate(1.0)
+        self.Donor = Donor(self.blood_bank).Activate(1.0)
 
         # self.Patient.Activate(1.0)
         # try:
@@ -22,20 +22,20 @@ class Program():
         self.unitsOfBloodAfterInitalyPhase = 0
         self.subsidiaryFlag = True
 
-    def MainLoop(self):
-        while(Patient._PatientCounter < 2000):
-            if(self.bloodDonationPoint.SystemTime > 9999 and self.subsidiaryFlag == True):
+    def main_loop(self):
+        while(Patient.patient_counter < 2000):
+            if(self.blood_bank.SystemTime > 9999 and self.subsidiaryFlag == True):
                 self.unitsOfBloodAfterInitalyPhase = BloodUnit._BloodId
                 self.subsidiaryFlag = False
-            self.currentProcess = self.bloodDonationPoint.Schedule.GetFirstEvent().process
-            self.bloodDonationPoint.SystemTime = self.currentProcess.ProcessEvent.EventTime
-            print("Czas " + str(self.bloodDonationPoint.SystemTime))
+            self.currentProcess = self.blood_bank.Schedule.GetFirstEvent().process
+            self.blood_bank.SystemTime = self.currentProcess.ProcessEvent.EventTime
+            print("Czas " + str(self.blood_bank.SystemTime))
             self.currentProcess.Execute()
-            if(len(self.bloodDonationPoint.PatientQueue) != 0 and self.bloodDonationPoint.busyFlag == False):
-                job = self.bloodDonationPoint.PatientQueue.popleft()
+            if(len(self.blood_bank.PatientQueue) != 0 and self.blood_bank.busyFlag == False):
+                job = self.blood_bank.PatientQueue.popleft()
                 job.Activate(0.0)
             print("Nowe zdarzenie \r \n \t")
-            self.bloodDonationPoint.Schedule.Print()
+            self.blood_bank.Schedule.Print()
 
             if(self.stepMode == True):
                 try:
@@ -43,12 +43,12 @@ class Program():
                 except SyntaxError:
                     pass
         print("Czas na fazę początkową = " +
-              str(self.bloodDonationPoint.InitialPhase))
-        print("Obsluzono " + str(Patient._PatientCounter) + " pacjentow")
+              str(self.blood_bank.InitialPhase))
+        print("Obsluzono " + str(Patient.patient_counter) + " pacjentow")
         print("Obsluzono " + str(Donor._DonorID) + " dawcow")
         print("Przez symulacje bylo " +
               str(BloodUnit._BloodId) + " różnych jednostek krwi")
-        print("Az, " + str(self.bloodDonationPoint.UtilizedBlood) +
+        print("Az, " + str(self.blood_bank.UtilizedBlood) +
               " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) +
               " razy, a standardowo " + str(Blood._AmountOfStandardOrders))
@@ -58,5 +58,5 @@ class Program():
               " pacjetow o grupie A i " + str(Patient._PatientB) + " o grupie B.")
 
 
-run = Program()
-run.MainLoop()
+run = Main()
+run.main_loop()

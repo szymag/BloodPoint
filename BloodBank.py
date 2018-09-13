@@ -3,7 +3,7 @@ from Schedule import Schedule
 from Distributions import Distributions
 
 
-class BloodDonationPoint():
+class blood_bank():
 
     def __init__(self):
         self.InitialPhase = 40000
@@ -56,11 +56,3 @@ class BloodDonationPoint():
                 self.UtilizedBlood += 1
             del(self.BloodListB[0])
             self.BloodListB = sorted(self.BloodListB, key=self.getBloodKey)
-
-    def RemoveBloodScience(self):
-        print("Usunieto SCIENCE jednostkwe krwi o ID: " +
-              str(self.BloodList[0]._BloodId))
-        if(self.SystemTime > self.InitialPhase):
-            self.BloodForScience += 1
-        del(self.BloodList[0])
-        self.BloodList = sorted(self.BloodList, key=self.getBloodKey)

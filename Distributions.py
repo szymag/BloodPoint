@@ -1,46 +1,38 @@
-# from KernelsGenerator import KernelsGenerator
 import math
-import matplotlib.pyplot as plt
+
 import matplotlib.animation as anim
+import matplotlib.pyplot as plt
 
 
 class Distributions():
 
     def __init__(self):
         self.Iteration = 20001
-        self.q = 127773
-        self.a = 16807
-        self.r = 2836
         f = open("./Kernels.txt", 'r')
         self.data = f.readlines()
         f.close()
 
-        # o=[]
-        # for i in range(500000):
-        # o.append(self.GetBLoodReturnTime())
-        # print(o)
-        # plt.hist(o, 100, density=False, facecolor='g', alpha=0.2)
+        # o = []
+        # for i in range(6000):
+        #     o.append(self.get_exponential(1700))
+        # # print(o)
+        # plt.hist(o, 50, density=True, facecolor='g', alpha=0.2)
         # plt.xlabel('Smarts')
         # plt.ylabel('Probability')
         # plt.title('Histogram')
         # plt.show()
 
     def Generate(self):
-        # data = np.genfromtxt("./Kernels.txt",delimiter=",")
-
-        # print(data)
+        q = 127773
+        a = 16807
+        r = 2836
         x = int(self.data[self.Iteration])
-        # print(x)
-        self.h = int(x / self.q)
-        qh = self.q*self.h
-        xqh = x-qh
-        axqh = self.a*xqh
-        result = axqh-(self.r*self.h)
-        result = int((self.a * (x - qh)) - (self.r * self.h))
-        if (result < 0):
+        h = int(x / q)
+        result = int((a * (x - (q*h))) - (r * h))
+        if(result < 0):
             result = result + 2147483647
         self.Iteration += 1
-        return int(result)
+        return result
 
     def GetBloodType(self):
         Value = self.Generate()
@@ -74,27 +66,22 @@ class Distributions():
         else:
             return False
 
-    def GetBLoodReturnTime(self):  # convert to
+    def GetBLoodReturnTime(self):
         Value = self.Generate()
-
         result = float((100*((float(Value) / 100) % 1)/1.98))+150
         return result
 
-    def GetExponential(self, average):
+    def get_exponential(self, average):
         Value = self.GetUniform()
         while(Value == 0):
             Value = self.GetUniform()
-        Value = -average * math.log(Value)
-        return Value
+        return(-average * math.log(Value))
 
-    def GetNormal(self):
-        sum = float(0)
-        for i in range(10):
-            r = self.Generate()
-            # x=int(r)
-            r = (r/100) % 1
-            sum = sum+r
-        result = float(((sum - 5) / (math.sqrt(100/12))) + 500)
-        return result
+    def get_normal(self):
+        sum_i = 0.0
+        for _i in range(10):
+            sum_i += (self.Generate()/100) % 1
+        return float(((sum_i - 5) / (math.sqrt(100/12))) + 500)
 
-# Distributions()
+
+a = Distributions()

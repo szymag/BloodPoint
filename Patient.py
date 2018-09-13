@@ -4,7 +4,7 @@ from Blood import Blood
 
 
 class Patient(Process):
-    _PatientCounter = 0
+    patient_counter = 0
     _PatientA = 0
     _PatientB = 0
 
@@ -20,11 +20,11 @@ class Patient(Process):
         self.BloodNeeded = self.BDPoint.Distributions.GetGeometric()
         if(self.BloodNeeded == 0):
             self.BloodNeeded = 1
-        self.ID = Patient._PatientCounter
+        self.ID = Patient.patient_counter
         print("Do bazy dodano nowego pacjenta numer " +
               str(self.ID) + " o grupie krwi: " + str(self.BloodType))
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
-            Patient._PatientCounter += 1
+            Patient.patient_counter += 1
 
     def Execute(self):
         self.active = True
@@ -43,7 +43,7 @@ class Patient(Process):
 
     def Phase0(self):
         Patient(self.BDPoint).Activate(
-            self.BDPoint.Distributions.GetExponential(250))
+            self.BDPoint.Distributions.get_exponential(250))
         self.BDPoint.PatientQueue.append(self)
         print("dodatno do kolejki pacjenta ", self.ID)
         self.Phase = 1
@@ -124,7 +124,7 @@ class Patient(Process):
         if(self.BloodType == "A" and self.BloodNeeded < len(self.BDPoint.BloodListA)):
             print("Pacjent od nr ID" + str(self.ID) + "otrzymal " +
                   str(self.BloodNeeded) + " jednostek grupy typu A")
-            for i in range(self.BloodNeeded):
+            for _i in range(self.BloodNeeded):
                 del(self.BDPoint.BloodListA[0])
             print("Pacjent o nr ID " + str(self.ID) + " wyszedl.")
             self.BDPoint.busyFlag = 0
@@ -134,7 +134,7 @@ class Patient(Process):
         elif(self.BloodType == "B" and self.BloodNeeded < len(self.BDPoint.BloodListB)):
             print("Pacjent od nr ID" + str(self.ID) + "otrzymal " +
                   str(self.BloodNeeded) + " jednostek krwi typu B")
-            for i in range(self.BloodNeeded):
+            for _i in range(self.BloodNeeded):
                 del(self.BDPoint.BloodListB[0])
             print("Pacjent o nr ID " + str(self.ID) + " wyszedl.")
             self.BDPoint.busyFlag = 0
@@ -159,4 +159,3 @@ class Patient(Process):
         return("Pacjent od nr ID : " + str(self.ID) + " | czas: " + str(self.ProcessEvent.EventTime))
 
 
-# Pat=Patient()

@@ -1,4 +1,3 @@
-
 class BloodUnit():
     _BloodId = 0
     _BloodA = 0
