@@ -14,7 +14,7 @@ class Main():
 
         try:
             self.stepMode = int(
-                input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
+                input('Przeprowadzic sss symulacje krokowo(1) czy ciagle(2):'))
         except ValueError:
             print("Zla odpowiedz")
 
