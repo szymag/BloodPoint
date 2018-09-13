@@ -69,7 +69,7 @@ class Generators():
     def get_blood_returning_time(self):
         var = self.generate_seed()
         result = float((100*((float(var) / 100) % 1)/1.98))+150
-        return result 
+        return result
 
     def get_exponential(self, average):
         var = self.get_uniform()
