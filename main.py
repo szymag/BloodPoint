@@ -1,5 +1,5 @@
 from Patient import Patient
-from bdp import BloodDonationPoint
+from BloodDonationPoint import BloodDonationPoint
 from Donor import Donor
 from BloodUnit import BloodUnit
 from EmergencyBlood import EmergencyBlood
@@ -21,7 +21,6 @@ class Program():
         self.stepMode = 0
         self.unitsOfBloodAfterInitalyPhase = 0
         self.subsidiaryFlag = True
-        # PAtientID -> patientNumber
 
     def MainLoop(self):
         while(Patient._PatientCounter < 2000):

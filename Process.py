@@ -1,5 +1,5 @@
 # from BloodDonationPoint import *
-from bdp import BloodDonationPoint
+from BloodDonationPoint import BloodDonationPoint
 from Event import Event
 # import Event
 

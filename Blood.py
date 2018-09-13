@@ -35,6 +35,7 @@ class Blood(Process):
         for i in range(self.BDPoint.N):
             self.BDPoint.AddBlood(BloodUnit(
                 self.BDPoint, self.BDPoint.SystemTime + self.Time, self.BloodTypeOrder, "Standard"))
+            print("Zamawiam Standardowo krew nr " + str(i))
         self._active = False
         print("Dostarczono standardowe zamowinie na krew grupy " +
               self.BloodTypeOrder)
