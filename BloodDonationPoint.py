@@ -23,16 +23,16 @@ class BloodDonationPoint():
 
         self.busy_flag = 0
 
-    def getBloodKey(self, time):
+    def get_blood_key(self, time):
         return int(time.expiration_date)
 
     def add_blood(self, blood):
         if(blood.blood_type == "A"):
             self.blood_list_a.append(blood)
-            self.blood_list_a = sorted(self.blood_list_a, key=self.getBloodKey)
+            self.blood_list_a = sorted(self.blood_list_a, key=self.get_blood_key)
         else:
             self.blood_list_b.append(blood)
-            self.blood_list_b = sorted(self.blood_list_b, key=self.getBloodKey)
+            self.blood_list_b = sorted(self.blood_list_b, key=self.get_blood_key)
 
     def remove_blood(self, blood_type):
         if(blood_type == "A"):
@@ -41,11 +41,11 @@ class BloodDonationPoint():
             if(self.system_time > self.initial_phase):
                 self.utilized_blood += 1
             del(self.blood_list_a[0])
-            self.blood_list_a = sorted(self.blood_list_a, key=self.getBloodKey)
+            self.blood_list_a = sorted(self.blood_list_a, key=self.get_blood_key)
         else:
             print("Usunieto jednostke krwi grupy B o id: ",
                   self.blood_list_b[0].id)
             if(self.system_time > self.initial_phase):
                 self.utilized_blood += 1
             del(self.blood_list_b[0])
-            self.blood_list_b = sorted(self.blood_list_b, key=self.getBloodKey)
+            self.blood_list_b = sorted(self.blood_list_b, key=self.get_blood_key)
