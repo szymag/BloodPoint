@@ -13,6 +13,10 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.pyc
+*.
+*_
+
 
 # Windows shortcuts
 *.lnk
@@ -45,3 +49,14 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+.installed.cfg
+
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
