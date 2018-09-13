@@ -82,3 +82,5 @@ class Generators():
         for _i in range(10):
             sum_i += (self.generate_seed()/100) % 1
         return float(((sum_i - 5) / (math.sqrt(100/12))) + 500)
+
+a=Generators()
