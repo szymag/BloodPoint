@@ -1,5 +1,5 @@
 from Patient import Patient
-from BloodBank import blood_bank
+from BloodDonationPoint import BloodDonationPoint
 from Donor import Donor
 from BloodUnit import BloodUnit
 from EmergencyBlood import EmergencyBlood
@@ -8,34 +8,40 @@ from Blood import Blood
 
 class Main():
     def __init__(self):
-        self.blood_bank = blood_bank()
-        self.Patient = Patient(self.blood_bank).Activate(1.0)
-        self.Donor = Donor(self.blood_bank).Activate(1.0)
+        self.bdp = BloodDonationPoint()
+        self.patient = Patient(self.bdp).activate(1.0)
+        self.donor = Donor(self.bdp).activate(1.0)
 
-        # self.Patient.Activate(1.0)
+        # self.patient.activate(1.0)
         # try:
         #     self.stepMode=int(input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
         # except ValueError:
         #     print("Zla odpowiedz")
 
         self.stepMode = 0
-        self.unitsOfBloodAfterInitalyPhase = 0
-        self.subsidiaryFlag = True
+
+        self.units_of_blood_after_ini_phase = 0
+        self.units_of_bloodA_after_ini_phase = 0
+        self.units_of_bloodB_after_ini_phase = 0
+
+        self.subsidiary_flag = True
 
     def main_loop(self):
         while(Patient.patient_counter < 2000):
-            if(self.blood_bank.SystemTime > 9999 and self.subsidiaryFlag == True):
-                self.unitsOfBloodAfterInitalyPhase = BloodUnit._BloodId
-                self.subsidiaryFlag = False
-            self.currentProcess = self.blood_bank.Schedule.GetFirstEvent().process
-            self.blood_bank.SystemTime = self.currentProcess.ProcessEvent.EventTime
-            print("Czas " + str(self.blood_bank.SystemTime))
-            self.currentProcess.Execute()
-            if(len(self.blood_bank.PatientQueue) != 0 and self.blood_bank.busyFlag == False):
-                job = self.blood_bank.PatientQueue.popleft()
-                job.Activate(0.0)
+            if(self.bdp.system_time > 9999 and self.subsidiary_flag == True):
+                self.units_of_blood_after_ini_phase = BloodUnit._BloodId
+                self.units_of_bloodA_after_ini_phase = BloodUnit._BloodA
+                self.units_of_bloodB_after_ini_phase = BloodUnit._BloodB
+                self.subsidiary_flag = False
+            self.currentProcess = self.bdp.schedule.get_first_event().process
+            self.bdp.system_time = self.currentProcess.proces_event.event_time
+            print("Czas " + str(self.bdp.system_time))
+            self.currentProcess.execute()
+            if(len(self.bdp.patient_queue) != 0 and self.bdp.busy_flag == False):
+                job = self.bdp.patient_queue.popleft()
+                job.activate(0.0)
             print("Nowe zdarzenie \r \n \t")
-            self.blood_bank.Schedule.Print()
+            self.bdp.schedule.print_schedule()
 
             if(self.stepMode == True):
                 try:
@@ -43,12 +49,12 @@ class Main():
                 except SyntaxError:
                     pass
         print("Czas na fazę początkową = " +
-              str(self.blood_bank.InitialPhase))
+              str(self.bdp.initial_phase))
         print("Obsluzono " + str(Patient.patient_counter) + " pacjentow")
         print("Obsluzono " + str(Donor._DonorID) + " dawcow")
         print("Przez symulacje bylo " +
               str(BloodUnit._BloodId) + " różnych jednostek krwi")
-        print("Az, " + str(self.blood_bank.UtilizedBlood) +
+        print("Az, " + str(self.bdp.UtilizedBlood) +
               " zostało zutylizowanych")
         print("Krew zamowiono awaryjnie " + str(EmergencyBlood._AmoutOfemergency) +
               " razy, a standardowo " + str(Blood._AmountOfStandardOrders))

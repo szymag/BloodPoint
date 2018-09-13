@@ -7,7 +7,7 @@ class BloodUnit():
         self.ID = BloodUnit._BloodId
         self.OrderType = OrderType
         self.BloodType = BloodTypeOrder
-        self.BloodTime = BDPoint.SystemTime
+        self.BloodTime = BDPoint.system_time
         print("Dodano jednostę krwi, grupy" +
               self.BloodType + " o ID:" + str(self._BloodId))
 

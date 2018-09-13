@@ -3,13 +3,13 @@ from Schedule import Schedule
 from Distributions import Distributions
 
 
-class blood_bank():
+class BloodDonationPoint():
 
     def __init__(self):
-        self.InitialPhase = 40000
-        self.SystemTime = 0.0
-        self.Schedule = Schedule()
-        self.PatientQueue = deque()
+        self.initial_phase = 40000
+        self.system_time = 0.0
+        self.schedule = Schedule()
+        self.patient_queue = deque()
         self.BloodListA = []
         self.BloodListB = []
         self.EnFlag = False
@@ -28,7 +28,7 @@ class blood_bank():
         self.UnitOnScience = 0
 
         self.EnVariable = 0
-        self.busyFlag = 0
+        self.busy_flag = 0
 
     def getBloodKey(self, time):
         return int(time.ExpirationDate)
@@ -45,14 +45,14 @@ class blood_bank():
         if(BloodType == "A"):
             print("Usunieto jednostke krwi grupy A o ID: ",
                   self.BloodListA[0].ID)
-            if(self.SystemTime > self.InitialPhase):
+            if(self.system_time > self.initial_phase):
                 self.UtilizedBlood += 1
             del(self.BloodListA[0])
             self.BloodListA = sorted(self.BloodListA, key=self.getBloodKey)
         else:
             print("Usunieto jednostke krwi grupy B o ID: ",
                   self.BloodListB[0].ID)
-            if(self.SystemTime > self.InitialPhase):
+            if(self.system_time > self.initial_phase):
                 self.UtilizedBlood += 1
             del(self.BloodListB[0])
             self.BloodListB = sorted(self.BloodListB, key=self.getBloodKey)

@@ -14,7 +14,7 @@ class EmergencyBlood(Process):
         self.Time = 800
         self._active = 0
 
-    def Execute(self):
+    def execute()(self):
         self._active = True
         while(self._active):
 
@@ -24,23 +24,23 @@ class EmergencyBlood(Process):
                 self.Phase1()
 
     def Phase0(self):
-        self.Activate(Distributions().get_normal())
+        self.activate(Distributions().get_normal())
         self.Phase = 1
         self._active = 0
         print("Zamówiono krew awaryjnie")
-        if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
+        if(self.bdp.system_time > self.bdp.initial_phase):
             EmergencyBlood._AmoutOfemergency += 1
 
     def Phase1(self):
-        for _i in range(self.BDPoint.Q):
-            self.BDPoint.AddBlood(BloodUnit(
-                self.BDPoint, self.BDPoint.SystemTime + self.Time, self.BloodTypeOrder, "Emergency"))
+        for _i in range(self.bdp.Q):
+            self.bdp.AddBlood(BloodUnit(
+                self.bdp, self.bdp.system_time + self.Time, self.BloodTypeOrder, "Emergency"))
         temp_run = self.OrderedPatient
-        temp_run.Activate(0.0)
+        temp_run.activate(0.0)
         self._active = 0
 
         print("Dojechalo zamowienie awaryjne dla pacjenta nr " +
               str(self.OrderedPatient.ID) + ".")
 
     def ToString(self):
-        return("Awaryjne zamowienie dla pacjetna o ID: " + str(self.OrderedPatient.ID) + "| czas: " + str(self.ProcessEvent.EventTime))
+        return("Awaryjne zamowienie dla pacjetna o ID: " + str(self.OrderedPatient.ID) + "| czas: " + str(self.proces_event.event_time))

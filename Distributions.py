@@ -23,9 +23,9 @@ class Distributions():
         # plt.show()
 
     def Generate(self):
-        q = 127773
-        a = 16807
-        r = 2836
+        q = 44488
+        a = 48271
+        r = 3399
         x = int(self.data[self.Iteration])
         h = int(x / q)
         result = int((a * (x - (q*h))) - (r * h))

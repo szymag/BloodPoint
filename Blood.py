@@ -13,7 +13,7 @@ class Blood(Process):
         self.Time = 800
         self.BloodTypeOrder = BloodType
 
-    def Execute(self):
+    def execute()(self):
         self._active = True
         while(self._active):
 
@@ -23,22 +23,22 @@ class Blood(Process):
                 self.Phase1()
 
     def Phase0(self):
-        self.Activate(Distributions().get_exponential(1700))
+        self.activate(Distributions().get_exponential(1700))
         self.Phase = 1
         self._active = 0
         print("Zamowiono krew grupy " +
               self.BloodTypeOrder + " metoda standardowa.")
-        if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
+        if(self.bdp.system_time > self.bdp.initial_phase):
             Blood._AmountOfStandardOrders += 1
 
     def Phase1(self):
-        for i in range(self.BDPoint.N):
-            self.BDPoint.AddBlood(BloodUnit(
-                self.BDPoint, self.BDPoint.SystemTime + self.Time, self.BloodTypeOrder, "Standard"))
+        for i in range(self.bdp.N):
+            self.bdp.AddBlood(BloodUnit(
+                self.bdp, self.bdp.system_time + self.Time, self.BloodTypeOrder, "Standard"))
             print("Zamawiam Standardowo krew nr " + str(i))
         self._active = False
         print("Dostarczono standardowe zamowinie na krew grupy " +
               self.BloodTypeOrder)
 
     def ToString(self):
-        return("Standardowe zamowienie | czas: " + str(self.ProcessEvent.EventTime))
+        return("Standardowe zamowienie | czas: " + str(self.proces_event.event_time))
