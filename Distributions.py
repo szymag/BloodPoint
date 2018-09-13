@@ -1,5 +1,8 @@
 # from KernelsGenerator import KernelsGenerator
 import math
+import matplotlib.pyplot as plt
+import matplotlib.animation as anim
+
 class Distributions():
     
 
@@ -11,8 +14,17 @@ class Distributions():
         f = open("./Kernels.txt", 'r')
         self.data = f.readlines()
         f.close()
-        # self.KernelsGenerator = KernelsGenerator()
-        pass
+
+        # o=[]
+        # for i in range(500000):
+            # o.append(self.GetBLoodReturnTime())
+        # print(o)
+        # plt.hist(o, 100, density=False, facecolor='g', alpha=0.2)
+        # plt.xlabel('Smarts')
+        # plt.ylabel('Probability')
+        # plt.title('Histogram')
+        # plt.show()
+
     def Generate(self):
         # data = np.genfromtxt("./Kernels.txt",delimiter=",")
 
@@ -31,6 +43,7 @@ class Distributions():
             result = result + 2147483647
         self.Iteration+=1
         return int(result)
+
     def GetBloodType(self):
         Value = self.Generate()
         result = ((float(Value) / 100) % 1)*100
@@ -64,9 +77,11 @@ class Distributions():
         else:
             return False
 
-    def GetUniformToEnlagmnet(self):  #convert to 
+
+    def GetBLoodReturnTime(self):  #convert to 
         Value = self.Generate()
-        result = int((Value % 6) + 5)
+
+        result = float((100*((float(Value) / 100) % 1)/1.98))+150
         return result
 
     def GetExponential(self,average):
@@ -85,3 +100,5 @@ class Distributions():
             sum=sum+r
         result = float((( sum - 5) / (math.sqrt(100/12))) +500 )
         return result
+    
+# Distributions()

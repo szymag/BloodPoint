@@ -20,11 +20,10 @@ class BloodDonationPoint():
         self.UtilizedBlood=0
         self.BloodForScience=0
         self.Distributions=Distributions()
-        self.BloodNumber=0
-        # self.PatientNumber=0
-        # self.DonorNumber=0
 
-        self.EnlargmentNumber=0
+        self.ReturnedBloodA=0
+        self.ReturnedBloodB=0
+        
         self.UnitOnScience=0
 
         self.EnVariable=0
@@ -43,13 +42,13 @@ class BloodDonationPoint():
     
     def RemoveBlood(self,BloodType):
         if(BloodType=="A"):
-            print("Usunieto jednostke krwi grupy A o ID: ", self.BloodListA[0]._BloodId)
+            print("Usunieto jednostke krwi grupy A o ID: ", self.BloodListA[0].ID)
             if(self.SystemTime > self.InitialPhase):
                 self.UtilizedBlood+=1
             del(self.BloodListA[0])
             self.BloodListA=sorted(self.BloodListA, key=self.getBloodKey) 
         else:
-            print("Usunieto jednostke krwi grupy B o ID: ", self.BloodListB[0]._BloodId)
+            print("Usunieto jednostke krwi grupy B o ID: ", self.BloodListB[0].ID)
             if(self.SystemTime > self.InitialPhase):
                 self.UtilizedBlood+=1
             del(self.BloodListB[0])

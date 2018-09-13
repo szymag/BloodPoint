@@ -26,15 +26,15 @@ class Blood(Process):
         self.Activate(Distributions().GetExponential(1700))
         self.Phase=1
         self._active=0
-        print("Zamowiono krew standardowo.")
+        print("Zamowiono krew grupy " + self.BloodTypeOrder + " metoda standardowa.")
         if(self.BDPoint.SystemTime > self.BDPoint.InitialPhase):
             Blood._AmountOfStandardOrders+=1
         
     def Phase1(self):
         for i in range(self.BDPoint.N):
-            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time,self.BloodTypeOrder))
+            self.BDPoint.AddBlood(BloodUnit(self.BDPoint,self.BDPoint.SystemTime + self.Time,self.BloodTypeOrder,"Standard"))
         self._active=False
-        print("Dostarczono standardowe zamowinie)")
+        print("Dostarczono standardowe zamowinie na krew grupy " + self.BloodTypeOrder)
 
     def ToString(self):
         return("Standardowe zamowienie | czas: " + str(self.ProcessEvent.EventTime))
