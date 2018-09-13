@@ -61,3 +61,7 @@ parts
 src/*.egg-info
 lib
 lib64
+.vscode
+.pytest_cache
+.gitignore
+.gitattributes
