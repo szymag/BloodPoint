@@ -15,7 +15,7 @@ class Donor(Process):
             Donor.counter_donor_a += 1
         else:
             Donor.counter_donor_b += 1
-        self.time = 1000
+        self.time = 500
         self.donorID = Donor.counter_donor
 
     def execute(self):

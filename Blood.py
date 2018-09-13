@@ -10,7 +10,7 @@ class Blood(Process):
 
     def __init__(self, bdp, blood_type):
         super().__init__(bdp)
-        self.time = 800
+        self.time = 300
         self.blood_type_order = blood_type
         self.active = False
 

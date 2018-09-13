@@ -12,8 +12,8 @@ class BloodDonationPoint():
         self.patient_queue = deque()
         self.blood_list_a = []
         self.blood_list_b = []
-        self.n = 15
-        self.minimal_blood = 70
+        self.n = 20
+        self.minimal_blood = 15
         self.q = 11
         self.utilized_blood = 0
         self.Generators = Generators()
