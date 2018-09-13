@@ -60,3 +60,4 @@ lib
 lib64
 .pytest_cache
 .vscode/settings.json
+.vscode/settings.json
