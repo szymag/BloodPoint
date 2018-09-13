@@ -35,8 +35,8 @@ class Generators():
         return result
 
     def get_blood_type(self):
-        var = self.generate_seed()
-        result = ((float(var) / 100) % 1)*100
+        var_temp = self.generate_seed()
+        result = ((float(var_temp) / 100) % 1)*100
         if(result <= 60):
             result = "A"
         else:
@@ -55,8 +55,8 @@ class Generators():
         return i
 
     def get_uniform(self):
-        var = self.generate_seed()
-        result = (float(var) / 100) % 1
+        var_temp = self.generate_seed()
+        result = (float(var_temp) / 100) % 1
         return result
 
     def get_bernoulli(self, randomVariable):
@@ -67,15 +67,15 @@ class Generators():
             return False
 
     def get_blood_returning_time(self):
-        var = self.generate_seed()
-        result = float((100*((float(var) / 100) % 1)/1.98))+150
+        var_temp = self.generate_seed()
+        result = float((100*((float(var_temp) / 100) % 1)/1.98))+150
         return result
 
     def get_exponential(self, average):
-        var = self.get_uniform()
-        while(var == 0):
-            var = self.get_uniform()
-        return(-average * math.log(var))
+        var_temp = self.get_uniform()
+        while(var_temp == 0):
+            var_temp = self.get_uniform()
+        return(-average * math.log(var_temp))
 
     def get_normal(self):
         sum_i = 0.0

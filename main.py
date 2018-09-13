@@ -11,8 +11,7 @@ class Main():
         self.bdp = BloodDonationPoint()
         self.patient = Patient(self.bdp).activate(1.0)
         self.donor = Donor(self.bdp).activate(1.0)
-
-        self.patient.activate(1.0)
+        
         try:
             self.stepMode = int(
                 input('Przeprowadzic symulacje krokowo(1) czy ciagle(2):'))
