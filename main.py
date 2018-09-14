@@ -12,6 +12,15 @@ class Main():
         self.bdp = BloodDonationPoint()
         self.patient = Patient(self.bdp).activate(1.0)
         self.donor = Donor(self.bdp).activate(1.0)
+<<<<<<< HEAD
+=======
+        self.step_mode=0
+        try:
+            self.step_mode = int(
+                input('Przeprowadzic sss symulacje krokowo(1) czy ciagle(2):'))
+        except ValueError:
+            print("Zla odpowiedz")
+>>>>>>> 98a39f70e716e80fe5c9907749135f03846414f6
 
         self.units_of_blood_after_ini_phase = 0
         self.units_ofcounter_blood_id_a_after_ini_phase = 0
@@ -34,7 +43,7 @@ class Main():
             print("Nowe zdarzenie \r \n \t")
             self.bdp.schedule.print_schedule()
 
-            if(self.stepMode == True):
+            if(self.step_mode == True):
                 try:
                     input("Press enter to continue")
                 except SyntaxError:
