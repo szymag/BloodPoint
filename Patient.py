@@ -138,7 +138,7 @@ class Patient(Process):
             self.phase = 4
 
         else:
-            temp_run = EmergencyStandardOrder(self, self.bdp, self.blood_type)
+            temp_run = EmergencyOrder(self, self.bdp, self.blood_type)
             temp_run.activate(0.0)
             self.active = False
             print("Zamowiono awaryjnie krew grupy" + self.blood_type + "dla Pacjenta o nr ID" + str(self.id) +
