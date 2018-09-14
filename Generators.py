@@ -20,7 +20,7 @@ class Generators():
         # plt.xlabel('Smarts')
         # plt.ylabel('Probability')
         # plt.title('Histogram') 
-        
+
         # plt.show()
 
     def generate_seed(self):
