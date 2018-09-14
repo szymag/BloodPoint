@@ -7,16 +7,11 @@ from StandardOrder import StandardOrder
 
 
 class Main():
+    
     def __init__(self):
         self.bdp = BloodDonationPoint()
         self.patient = Patient(self.bdp).activate(1.0)
         self.donor = Donor(self.bdp).activate(1.0)
-
-        try:
-            self.stepMode = int(
-                input('Przeprowadzic sss symulacje krokowo(1) czy ciagle(2):'))
-        except ValueError:
-            print("Zla odpowiedz")
 
         self.units_of_blood_after_ini_phase = 0
         self.units_ofcounter_blood_id_a_after_ini_phase = 0
