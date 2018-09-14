@@ -3,7 +3,7 @@ from Generators import Generators
 from UnitOfBlood import UnitOfBlood
 
 
-class Blood(Process):
+class StandardOrder(Process):
 
     counter_standard_order = 0
 

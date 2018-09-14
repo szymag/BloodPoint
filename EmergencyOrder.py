@@ -3,7 +3,7 @@ from Generators import Generators
 from UnitOfBlood import UnitOfBlood
 
 
-class EmergencyBlood(Process):
+class EmergencyOrder(Process):
 
     counter_emergency = 0
 
@@ -29,7 +29,7 @@ class EmergencyBlood(Process):
         self.active = 0
         print("Zamowiono krew awaryjnie!")
         if(self.bdp.system_time > self.bdp.initial_phase):
-            EmergencyBlood.counter_emergency += 1
+            EmergencyOrder.counter_emergency += 1
 
     def phase1(self):
         for _i in range(self.bdp.q):

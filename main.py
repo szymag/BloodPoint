@@ -2,8 +2,8 @@ from Patient import Patient
 from BloodDonationPoint import BloodDonationPoint
 from Donor import Donor
 from UnitOfBlood import UnitOfBlood
-from EmergencyBlood import EmergencyBlood
-from Blood import Blood
+from EmergencyOrder import EmergencyOrder
+from StandardOrder import StandardOrder
 
 
 class Main():
@@ -52,8 +52,8 @@ class Main():
               str(UnitOfBlood.counter_blood_id) + " różnych jednostek krwi")
         print("Az, " + str(self.bdp.utilized_blood) +
               " zostało zutylizowanych")
-        print("Krew zamowiono awaryjnie " + str(EmergencyBlood.counter_emergency) +
-              " razy, a standardowo " + str(Blood.counter_standard_order))
+        print("Krew zamowiono awaryjnie " + str(EmergencyOrder.counter_emergency) +
+              " razy, a standardowo " + str(StandardOrder.counter_standard_order))
         print("Grupa A:" + str(UnitOfBlood.counter_blood_id_a) +
               " Grupa B: " + str(UnitOfBlood.counter_blood_id_b))
         print("Zarejestrowano " + str(Patient.counter_patient_a) +

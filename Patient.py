@@ -1,6 +1,6 @@
 from Process import Process
-from EmergencyBlood import EmergencyBlood
-from Blood import Blood
+from EmergencyOrder import EmergencyOrder
+from StandardOrder import StandardOrder
 
 
 class Patient(Process):
@@ -92,24 +92,24 @@ class Patient(Process):
             # USUWANIE PRZETERMINOWANEJ KRWI End
 
         if(len(self.bdp.blood_list_a) < self.bdp.minimal_blood):
-            Blood(self.bdp, "A").activate(0.0)
+            StandardOrder(self.bdp, "A").activate(0.0)
             pass
 
         if(len(self.bdp.blood_list_b) < self.bdp.minimal_blood):
-            Blood(self.bdp, "B").activate(0.0)
+            StandardOrder(self.bdp, "B").activate(0.0)
             pass
 
         self.phase = 2
 
     def phase2(self):
         if(self.blood_type == "A" and len(self.bdp.blood_list_a) < self.blood_needed):
-            EmergencyBlood(self, self.bdp, self.blood_type).activate(0.0)
+            EmergencyOrder(self, self.bdp, self.blood_type).activate(0.0)
             self.active = False
             print("Zamowiono awaryjnie krew grupy A dla pacjenta o nr ID: " + str(self.id) +
                   ". Potrzebna liczba jednostek krwi:" + str(self.blood_needed) + " | Czas: " + str(self.bdp.system_time))
 
         if(self.blood_type == "B" and len(self.bdp.blood_list_b) < self.blood_needed):
-            EmergencyBlood(self, self.bdp, self.blood_type).activate(0.0)
+            EmergencyOrder(self, self.bdp, self.blood_type).activate(0.0)
             self.active = False
             print("Zamowiono awaryjnie krew grupy B dla pacjenta o nr ID: " + str(self.id) +
                   ". Potrzebna liczba jednostek krwi: " + str(self.blood_needed) + " | Czas: " + str(self.bdp.system_time))
@@ -138,7 +138,7 @@ class Patient(Process):
             self.phase = 4
 
         else:
-            temp_run = EmergencyBlood(self, self.bdp, self.blood_type)
+            temp_run = EmergencyStandardOrder(self, self.bdp, self.blood_type)
             temp_run.activate(0.0)
             self.active = False
             print("Zamowiono awaryjnie krew grupy" + self.blood_type + "dla Pacjenta o nr ID" + str(self.id) +
